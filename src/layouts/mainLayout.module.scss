@@ -1,0 +1,17 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	background-color: bisque;
+}
+.header {
+	height: 10%;
+}
+.content {
+	height: 80%;
+}
+.footer {
+	justify-content: flex-end;
+	height: 10%;
+	background-color: aquamarine;
+}
