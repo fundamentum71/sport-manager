@@ -3,6 +3,10 @@
 	height: 60px;
 	width: 100%;
 	align-items: center;
+	//a {
+	//	width: 110px;
+	//	height: 25px;
+	//}
 }
 
 .logo {
@@ -22,15 +26,30 @@
 }
 
 .btn {
+	color: #001584;
 	width: 100px;
+	height: 25px;
 	border-radius: 10px;
-	border: 1px solid black;
+	border: 1px solid #001584;
 	padding: 0 10px;
 	margin: 10px;
 	background-color: white;
-	&:hover {
-	}
+	cursor: pointer;
+
 	&:active {
 		transform: scale(1.05);
+	}
+}
+
+.active {
+	color: white;
+	width: 100px;
+	height: 25px;
+	border-radius: 10px;
+	border: 1px solid #001584;
+	padding: 0 10px;
+	margin: 10px;
+	background-color: #001584;
+	&:hover {
 	}
 }

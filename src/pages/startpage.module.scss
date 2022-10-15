@@ -31,6 +31,7 @@
 	color: #001584;
 	font-size: 1.4rem;
 	margin-top: 50px;
+	font-family: 'Rambla', sans-serif;
 }
 
 .btn {
@@ -41,8 +42,10 @@
 	font-size: 1.12rem;
 	color: #ffffff;
 	background: #3d0075;
-	border-radius: 2px;
+	border-radius: 8px;
 	margin-top: 20px;
+	border: 0;
+	font-family: 'Rambla', sans-serif;
 	cursor: pointer;
 	&:active {
 		transform: scale(1.05);

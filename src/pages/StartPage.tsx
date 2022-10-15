@@ -7,7 +7,7 @@ const StartPage = () => {
 		<div className={styles.wrapper}>
 			<div className={styles.container}>
 				<div className={styles.logoPrev}>
-					<img src={logoPrev} alt="" />
+					<img src={logoPrev} alt="logo" />
 				</div>
 				<div className={styles.text}>
 					Современный сервис для активных людей. Выбирай любимый вид спорта, находи людей по
