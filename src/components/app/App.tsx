@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import MainLayout from '../../layouts/MainLayout';
 import Home from '../../pages/Home';
+import Profile from '../../pages/Profile';
 import StartPage from '../../pages/StartPage';
 import styles from './app.module.scss';
 
@@ -27,6 +28,14 @@ function App() {
 					element={
 						<Suspense fallback={<div>Загрузка...</div>}>
 							<StartPage />
+						</Suspense>
+					}
+				/>
+				<Route
+					path="/profile"
+					element={
+						<Suspense fallback={<div>Загрузка...</div>}>
+							<Profile />
 						</Suspense>
 					}
 				/>

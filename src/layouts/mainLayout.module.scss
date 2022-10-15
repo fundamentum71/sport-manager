@@ -2,16 +2,14 @@
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
-	background-color: bisque;
 }
 .header {
-	height: 10%;
+	height: 7%;
 }
 .content {
-	height: 80%;
+	height: 88%;
 }
 .footer {
 	justify-content: flex-end;
-	height: 10%;
-	background-color: aquamarine;
+	height: 5%;
 }
