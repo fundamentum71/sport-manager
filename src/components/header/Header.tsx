@@ -10,9 +10,14 @@ const Header = () => {
 		{ title: 'О сайте', link: '/start', id: 0 },
 		{ title: 'Главная', link: '/', id: 1 },
 		{ title: 'Профиль', link: '/profile', id: 2 },
-		{ title: 'Войти', link: '/signin', id: 3 },
-		{ title: 'Регистрация', link: '/signup', id: 4 },
+		//{ title: 'Войти', link: '/signin', id: 3 },
+		//{ title: 'Регистрация', link: '/signup', id: 4 },
 	];
+
+	const removeActiv = () => {
+		setActiveListItem(-1);
+	};
+
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.logo}>
@@ -29,6 +34,17 @@ const Header = () => {
 						</button>
 					</Link>
 				))}
+				<Link to={'/signin'}>
+					<button onClick={removeActiv} className={styles.btn_reg}>
+						Войти
+					</button>
+				</Link>
+				<Link to={'/signup'}>
+					<button onClick={removeActiv} className={styles.btn_reg}>
+						Регистрация
+					</button>
+				</Link>
+				<button className={styles.btn_exit}>Выйти</button>
 			</div>
 		</div>
 	);

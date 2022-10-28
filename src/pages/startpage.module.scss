@@ -1,19 +1,25 @@
 .wrapper {
 	width: 100%;
-	height: 100%;
-	background: url('../assets/images/startfon.jpg') center 0 / cover no-repeat;
-	position: relative;
+	min-height: 100%;
+	background: url('../assets/images/bg_about.jpg') center 0 / cover no-repeat;
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	//position: relative;
 }
 
 .container {
-	position: absolute;
-	right: 1px;
-	bottom: 100px;
+	//position: absolute;
+	//right: 1px;
+	//bottom: 100px;
 	width: 640px;
 	height: 310;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
+	//margin-right: 70px;
+	margin-bottom: 50px;
 }
 
 .logoPrev {
@@ -27,15 +33,17 @@
 }
 
 .text {
+	text-indent: 60px;
 	width: 600px;
-	color: #001584;
+	color: #f7f7f7;
 	font-size: 1.4rem;
-	margin-top: 50px;
-	font-family: 'Rambla', sans-serif;
+	margin-top: 80px;
+	//font-family: 'Rambla', sans-serif;
+	//font-family: 'Rubik Mono One', sans-serif;
 }
 
 .btn {
-	width: 240px;
+	width: 340px;
 	height: 40px;
 	left: 985px;
 	top: 760px;
@@ -47,7 +55,12 @@
 	border: 0;
 	font-family: 'Rambla', sans-serif;
 	cursor: pointer;
+	transition: 0.5s;
+	&:hover {
+		color: #3d0075;
+		background: #ffffff;
+	}
 	&:active {
-		transform: scale(1.05);
+		transform: scale(1.03);
 	}
 }
