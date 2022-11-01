@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.svg';
 import styles from './header.module.scss';
+import btns from '../../style/btns.module.scss';
 
 const Header = () => {
 	const [activeListItem, setActiveListItem] = React.useState(0);
@@ -26,25 +27,33 @@ const Header = () => {
 
 			<div className={styles.btns}>
 				{listPage.map((item) => (
-					<Link key={item.id} to={item.link}>
-						<button
-							onClick={() => setActiveListItem(item.id)}
-							className={activeListItem === item.id ? styles.active : styles.btn}>
-							{item.title}
+					<div className={btns.m10}>
+						<Link key={item.id} to={item.link}>
+							<button
+								onClick={() => setActiveListItem(item.id)}
+								className={activeListItem === item.id ? styles.active : styles.btn}>
+								{item.title}
+							</button>
+						</Link>
+					</div>
+				))}
+				<div className={btns.m10}>
+					<Link to={'/signin'}>
+						<button onClick={removeActiv} className={styles.btn_reg}>
+							Войти
 						</button>
 					</Link>
-				))}
-				<Link to={'/signin'}>
-					<button onClick={removeActiv} className={styles.btn_reg}>
-						Войти
-					</button>
-				</Link>
-				<Link to={'/signup'}>
-					<button onClick={removeActiv} className={styles.btn_reg}>
-						Регистрация
-					</button>
-				</Link>
-				<button className={styles.btn_exit}>Выйти</button>
+				</div>
+				<div className={btns.m10}>
+					<Link to={'/signup'}>
+						<button onClick={removeActiv} className={styles.btn_reg}>
+							Регистрация
+						</button>
+					</Link>
+				</div>
+				<div className={btns.m10}>
+					<button className={styles.btn_exit}>Выйти</button>
+				</div>
 			</div>
 		</div>
 	);
