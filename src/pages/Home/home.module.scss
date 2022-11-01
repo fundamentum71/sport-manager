@@ -1,0 +1,41 @@
+.rooms {
+	max-width: 1100px;
+	margin: 30px auto 0 auto;
+	h1 {
+		text-align: center;
+		margin-bottom: 40px;
+	}
+}
+
+.wrapper {
+	display: flex;
+	justify-content: space-around;
+}
+
+.items {
+	width: 800px;
+	height: 68vh;
+	overflow: auto;
+}
+.btn {
+	width: 240px;
+	height: 40px;
+	left: 985px;
+	top: 760px;
+	font-size: 1.12rem;
+	color: #ffffff;
+	background: #3d0075;
+	border-radius: 8px;
+	margin: 20px;
+	border: 0;
+	font-family: 'Rambla', sans-serif;
+	cursor: pointer;
+	transition: 0.5s;
+	&:hover {
+		color: #3d0075;
+		background: #ffffff;
+	}
+	&:active {
+		transform: scale(1.03);
+	}
+}

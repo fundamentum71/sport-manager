@@ -1,14 +1,20 @@
 import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import MainLayout from '../../layouts/MainLayout';
-import Home from '../../pages/Home';
-import Profile from '../../pages/Profile';
-import StartPage from '../../pages/StartPage';
+import Home from '../../pages/Home/Home';
+import Profile from '../../pages/Profile/Profile';
+import StartPage from '../../pages/StartPage/StartPage';
 import styles from './app.module.scss';
 
-const NotFound = React.lazy(() => import(/* webpackChunkName: 'NotFound'*/ '../../pages/NotFound'));
-const SignIn = React.lazy(() => import(/* webpackChunkName: 'SignIn'*/ '../../pages/SignIn'));
-const SignUp = React.lazy(() => import(/* webpackChunkName: 'SignUp'*/ '../../pages/SignUp'));
+const NotFound = React.lazy(
+	() => import(/* webpackChunkName: 'NotFound'*/ '../../pages/NotFound/NotFound'),
+);
+const SignIn = React.lazy(
+	() => import(/* webpackChunkName: 'SignIn'*/ '../../pages/SignIn/SignIn'),
+);
+const SignUp = React.lazy(
+	() => import(/* webpackChunkName: 'SignUp'*/ '../../pages/SignUp/SignUp'),
+);
 
 function App() {
 	return (

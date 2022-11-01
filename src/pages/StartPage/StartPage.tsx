@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './startpage.module.scss';
-import logoPrev from '../assets/images/logoPrev.svg';
+import logoPrev from '../../assets/images/logoPrev.svg';
 
 const StartPage = () => {
 	return (
