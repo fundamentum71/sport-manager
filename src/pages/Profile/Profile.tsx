@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './profile.module.scss';
 import avatar from '../../assets/images/avatar.jpg';
+import { Link } from 'react-router-dom';
 
 function Profile() {
 	return (
@@ -27,7 +28,9 @@ function Profile() {
 					<div className={styles.info_statistic}>Не пришел: 3</div>
 
 					<div className={styles.info_btns}>
-						<button className={styles.btn_edit}>Редактировать</button>
+						<Link to="/editProfile">
+							<button className={styles.btn_edit}>Редактировать</button>
+						</Link>
 					</div>
 				</div>
 			</div>

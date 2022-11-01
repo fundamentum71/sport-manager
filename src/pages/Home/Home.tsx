@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CartRoomInHome from '../../components/cartRoom/CartRoomInHome';
 import styles from './home.module.scss';
 
@@ -13,7 +14,9 @@ function Home() {
 					<CartRoomInHome />
 					<CartRoomInHome />
 				</div>
-				<button className={styles.btn}>Создать комнату</button>
+				<Link to="/addroom">
+					<button className={styles.btn}>Создать комнату</button>
+				</Link>
 			</div>
 		</div>
 	);

@@ -1,13 +1,14 @@
 import React from 'react';
 import styles from './cartRoomInHome.module.scss';
 import EditIcon from '@mui/icons-material/Edit';
+import { Link } from 'react-router-dom';
 
 const CartRoomInHome = () => {
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.items}>
 				<div className={styles.item}>
-					<b>Номер комнаты:</b> 1
+					<b>Название комнаты:</b> конченные футболисты
 				</div>
 				<div className={styles.item}>
 					<b>Создал комнату:</b> Пупкин В.С.
@@ -26,10 +27,14 @@ const CartRoomInHome = () => {
 				</div>
 			</div>
 			<div className={styles.btns}>
-				<button className={styles.btn}>Войти в комнату</button>
-				<button className={styles.btn_edit}>
-					<EditIcon />
-				</button>
+				<Link to="/room">
+					<button className={styles.btn}>Войти в комнату</button>
+				</Link>
+				<Link to="/editroom">
+					<button className={styles.btn_edit}>
+						<EditIcon />
+					</button>
+				</Link>
 			</div>
 		</div>
 	);
