@@ -10,6 +10,7 @@
 .container {
 	width: 400px;
 	display: flex;
+
 	flex-direction: column;
 	align-items: center;
 	.logoPrev {
@@ -33,9 +34,11 @@
 }
 
 .items {
-	width: 800px;
+	width: 900px;
 	height: 68vh;
 	overflow: auto;
+	display: flex;
+	flex-wrap: wrap;
 }
 .btn {
 	margin-top: -10px;

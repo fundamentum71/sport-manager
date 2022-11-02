@@ -43,14 +43,14 @@ function App() {
 					}
 				/>
 
-				<Route
+				{/*<Route
 					path="/editProfile"
 					element={
 						<Suspense fallback={<CircularProgress color="secondary" />}>
 							<EditProfile />
 						</Suspense>
 					}
-				/>
+				/>*/}
 
 				<Route
 					path="/addroom"
