@@ -1,0 +1,24 @@
+textarea {
+	width: 100%;
+	height: 100px;
+	padding: 15px;
+	display: block;
+	border-radius: 6px;
+	resize: none;
+}
+.btns_chat {
+	color: #ffffff;
+	font-weight: 800;
+	width: 150px;
+	height: 30px;
+	border-radius: 5px;
+	border: none;
+	padding: 0 10px;
+	margin: 10px;
+	background-color: #34a22a;
+	cursor: pointer;
+
+	&:active {
+		filter: brightness(0.8);
+	}
+}
