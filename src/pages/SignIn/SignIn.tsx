@@ -1,7 +1,8 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { fetchAuth } from '../../redux/auth/asyncActions';
-//import { selectIsAuth } from '../../redux/auth/slice';
+import { authReducer } from '../../redux/auth/slice';
+import { selectIsAuth } from '../../redux/auth/slice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import styles from './signin.module.scss';
 
@@ -11,7 +12,10 @@ export type SignInProps = {
 };
 
 function SignIn() {
-	//const isAuth = useAppSelector(selectIsAuth);
+	const isAuth = useAppSelector(selectIsAuth);
+	const data = useAppSelector((store) => store.auth.data);
+	console.log(data);
+
 	const dispatch = useAppDispatch();
 
 	const [password, setPassword] = React.useState('1111111');
@@ -109,11 +113,11 @@ function SignIn() {
 	}, [passwordError, emailError, email, password]);
 
 	console.log(password, email);
-	//console.log(isAuth);
+	console.log(isAuth);
 
-	//if (isAuth) {
-	//	return <Navigate to="/" />;
-	//}
+	if (isAuth) {
+		return <Navigate to="/" />;
+	}
 
 	return (
 		<div className={styles.wrapper}>
