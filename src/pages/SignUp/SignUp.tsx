@@ -70,6 +70,17 @@ function SignUp() {
 
 			case 'checkbox':
 				setCheckPolice(!checkPolice);
+				if (name == '') {
+					setNameError('Поле является обязательным');
+				}
+
+				if (email == '') {
+					setEmailError('Поле является обязательным');
+				}
+
+				if (password == '') {
+					setPasswordError('Поле является обязательным');
+				}
 
 				break;
 
@@ -116,6 +127,22 @@ function SignUp() {
 		if (formValid) {
 			const data = await dispatch(fetchRegister(SingUpData));
 
+			//if (name == '') {
+			//	setNameError('Поле является обязательным');
+			//}
+
+			//if (email == '') {
+			//	setEmailError('Поле является обязательным');
+			//}
+
+			//if (password == '') {
+			//	setPasswordError('Поле является обязательным');
+			//}
+
+			if (!data.payload) {
+				return alert('Не удалось зарегистрироваться!');
+			}
+
 			setName('');
 			setNameDirty(false);
 			setNameError('');
@@ -129,10 +156,6 @@ function SignUp() {
 			setPasswordError('');
 
 			setCheckPolice(false);
-
-			if (!data.payload) {
-				return alert('Не удалось зарегистрироваться!');
-			}
 		}
 	};
 
@@ -158,9 +181,7 @@ function SignUp() {
 						onChange={(e) => onChangeValue(e)}
 						onFocus={(e) => blurHandler(e)}
 					/>
-					{nameDirty && nameError && (
-						<div style={{ color: 'red', fontSize: '0.8rem' }}>{nameError}</div>
-					)}
+					{nameError && <div style={{ color: 'red', fontSize: '0.8rem' }}>{nameError}</div>}
 					<label htmlFor="email">Почта:</label>
 					<input
 						id="email"
@@ -171,9 +192,7 @@ function SignUp() {
 						onChange={(e) => onChangeValue(e)}
 						onFocus={(e) => blurHandler(e)}
 					/>
-					{emailDirty && emailError && (
-						<div style={{ color: 'red', fontSize: '0.8rem' }}>{emailError}</div>
-					)}
+					{emailError && <div style={{ color: 'red', fontSize: '0.8rem' }}>{emailError}</div>}
 					<label htmlFor="password">Пароль:</label>
 					<input
 						id="password"
@@ -184,9 +203,7 @@ function SignUp() {
 						onChange={(e) => onChangeValue(e)}
 						onFocus={(e) => blurHandler(e)}
 					/>
-					{passwordDirty && passwordError && (
-						<div style={{ color: 'red', fontSize: '0.8rem' }}>{passwordError}</div>
-					)}
+					{passwordError && <div style={{ color: 'red', fontSize: '0.8rem' }}>{passwordError}</div>}
 					<div className={styles.checkbox}>
 						<input
 							id="checkbox"

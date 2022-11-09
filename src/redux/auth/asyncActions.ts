@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../../axios';
+import { SignInProps } from '../../pages/SignIn/SignIn';
 import { SignUpProps } from '../../pages/SignUp/SignUp';
 
 //запрос на авторизацию
-export const fetchAuth = createAsyncThunk('auth/fetchAuth', async (params) => {
+export const fetchAuth = createAsyncThunk('auth/fetchAuth', async (params: SignInProps) => {
 	const { data } = await axios.post('/auth/login', params);
 	return data;
 });
