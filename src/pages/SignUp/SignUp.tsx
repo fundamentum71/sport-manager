@@ -1,7 +1,11 @@
 import React from 'react';
+import { fetchRegister } from '../../redux/auth/asyncActions';
+import { useAppDispatch } from '../../redux/hooks';
 import styles from './signup.module.scss';
 
 function SignUp() {
+	const dispatch = useAppDispatch();
+
 	const [name, setName] = React.useState('');
 	const [password, setPassword] = React.useState('');
 	const [login, setLogin] = React.useState('');
@@ -92,9 +96,13 @@ function SignUp() {
 		}
 	}, [nameError, passwordError, loginError, checkPolice]);
 
-	const onSubmit = () => {
+	const onSubmit = async (values) => {
 		if (formValid) {
 			console.log('submit');
+			const data = await dispatch(fetchRegister(values));
+			if (!data.payload) {
+				return alert('Не удалось зарегистрироваться!');
+			}
 		}
 	};
 
