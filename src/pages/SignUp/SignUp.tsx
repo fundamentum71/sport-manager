@@ -40,15 +40,15 @@ function SignUp() {
 
 				break;
 			case 'email':
-				setEmail(e.target.value);
+				setEmail(e.target.value.toLowerCase());
 				const re =
 					/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-				if (!e.target.value) {
-					setEmailError('Поле является обязательным');
-				}
 				if (!e.target.value.match(re)) {
 					setEmailError('Введите вашу почту');
+					if (!e.target.value) {
+						setEmailError('Поле является обязательным');
+					}
 				} else {
 					setEmailError('');
 				}
