@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './roomGamer.module.scss';
+//import React from 'react';
+//import styles from './roomGamer.module.scss';
 
 function RoomGamers() {
 	return (

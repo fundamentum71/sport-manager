@@ -3,13 +3,13 @@ import { Route, Routes } from 'react-router-dom';
 import MainLayout from '../../layouts/MainLayout';
 import AddRoom from '../../pages/AddRoom/AddRoom';
 import EditProfile from '../../pages/EditProfile/EditProfile';
-import EditRoom from '../../pages/EditRoom/EditRoom';
+//import EditRoom from '../../pages/EditRoom/EditRoom';
 import Home from '../../pages/Home/Home';
 import Profile from '../../pages/Profile/Profile';
 import Room from '../../pages/Room/Room';
 import StartPage from '../../pages/StartPage/StartPage';
 import CircularProgress from '@mui/material/CircularProgress';
-import styles from './app.module.scss';
+//import styles from './app.module.scss';
 
 const NotFound = React.lazy(
 	() => import(/* webpackChunkName: 'NotFound'*/ '../../pages/NotFound/NotFound'),

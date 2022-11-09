@@ -3,21 +3,27 @@ import { fetchRegister } from '../../redux/auth/asyncActions';
 import { useAppDispatch } from '../../redux/hooks';
 import styles from './signup.module.scss';
 
+export type SignUpProps = {
+	fullName: string;
+	email: string;
+	password: string;
+};
+
 function SignUp() {
 	const dispatch = useAppDispatch();
 
 	const [name, setName] = React.useState('');
 	const [password, setPassword] = React.useState('');
-	const [login, setLogin] = React.useState('');
+	const [email, setEmail] = React.useState('');
 	const [checkPolice, setCheckPolice] = React.useState(false);
 
 	const [nameDirty, setNameDirty] = React.useState(false);
 	const [passwordDirty, setPasswordDirty] = React.useState(false);
-	const [loginDirty, setLoginDirty] = React.useState(false);
+	const [emailDirty, setEmailDirty] = React.useState(false);
 
 	const [nameError, setNameError] = React.useState('');
 	const [passwordError, setPasswordError] = React.useState('');
-	const [loginError, setLoginError] = React.useState('');
+	const [emailError, setEmailError] = React.useState('');
 
 	const [formValid, setFormValid] = React.useState(false);
 
@@ -33,13 +39,18 @@ function SignUp() {
 				}
 
 				break;
-			case 'login':
-				setLogin(e.target.value);
+			case 'email':
+				setEmail(e.target.value);
+				const re =
+					/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 				if (!e.target.value) {
-					setLoginError('Поле является обязательным');
+					setEmailError('Поле является обязательным');
+				}
+				if (!e.target.value.match(re)) {
+					setEmailError('Введите вашу почту');
 				} else {
-					setLoginError('');
+					setEmailError('');
 				}
 
 				break;
@@ -74,8 +85,8 @@ function SignUp() {
 			case 'name':
 				setNameDirty(true);
 				break;
-			case 'login':
-				setLoginDirty(true);
+			case 'email':
+				setEmailDirty(true);
 				break;
 			case 'password':
 				setPasswordDirty(true);
@@ -89,24 +100,43 @@ function SignUp() {
 
 	//проверка на валидность формы
 	React.useEffect(() => {
-		if (nameError || passwordError || loginError || !checkPolice) {
+		if (nameError || passwordError || emailError || !checkPolice) {
 			setFormValid(false);
 		} else {
 			setFormValid(true);
 		}
-	}, [nameError, passwordError, loginError, checkPolice]);
+	}, [nameError, passwordError, emailError, checkPolice]);
 
-	const onSubmit = async (values) => {
+	const onSubmit = async () => {
+		const SingUpData: SignUpProps = {
+			fullName: name,
+			email,
+			password,
+		};
 		if (formValid) {
-			console.log('submit');
-			const data = await dispatch(fetchRegister(values));
+			const data = await dispatch(fetchRegister(SingUpData));
+
+			setName('');
+			setNameDirty(false);
+			setNameError('');
+
+			setEmail('');
+			setEmailDirty(false);
+			setEmailError('');
+
+			setPassword('');
+			setPasswordDirty(false);
+			setPasswordError('');
+
+			setCheckPolice(false);
+
 			if (!data.payload) {
 				return alert('Не удалось зарегистрироваться!');
 			}
 		}
 	};
 
-	console.log(name, password, login, checkPolice);
+	console.log(name, password, email, checkPolice);
 
 	return (
 		<div className={styles.wrapper}>
@@ -131,18 +161,18 @@ function SignUp() {
 					{nameDirty && nameError && (
 						<div style={{ color: 'red', fontSize: '0.8rem' }}>{nameError}</div>
 					)}
-					<label htmlFor="login">Логин:</label>
+					<label htmlFor="email">Почта:</label>
 					<input
-						id="login"
-						name="login"
-						type="text"
-						placeholder="Введите логин"
-						value={login}
+						id="email"
+						name="email"
+						type="email"
+						placeholder="Введите почту"
+						value={email}
 						onChange={(e) => onChangeValue(e)}
 						onFocus={(e) => blurHandler(e)}
 					/>
-					{loginDirty && loginError && (
-						<div style={{ color: 'red', fontSize: '0.8rem' }}>{loginError}</div>
+					{emailDirty && emailError && (
+						<div style={{ color: 'red', fontSize: '0.8rem' }}>{emailError}</div>
 					)}
 					<label htmlFor="password">Пароль:</label>
 					<input
@@ -168,7 +198,7 @@ function SignUp() {
 						<label htmlFor="checkbox"> Cогласен с политикой конфиденциальности</label>
 					</div>
 				</div>
-				<button className={styles.btn} onClick={onSubmit}>
+				<button disabled={!formValid} className={styles.btn} onClick={onSubmit}>
 					зарегистрироваться
 				</button>
 			</div>

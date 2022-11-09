@@ -95,4 +95,12 @@
 	&:active {
 		background: #2f006b;
 	}
+	&:disabled {
+		background-color: #939191;
+		border: none;
+		cursor: auto;
+		&:active {
+			background: #939191;
+		}
+	}
 }

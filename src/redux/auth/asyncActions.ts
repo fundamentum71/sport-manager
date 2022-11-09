@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../../axios';
+import { SignUpProps } from '../../pages/SignUp/SignUp';
 
 //запрос на авторизацию
 export const fetchAuth = createAsyncThunk('auth/fetchAuth', async (params) => {
@@ -14,7 +15,7 @@ export const fetchAuthMe = createAsyncThunk('auth/fetchAuthMe', async () => {
 });
 
 //запрос на регистрацию
-export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (params) => {
+export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (params: SignUpProps) => {
 	const { data } = await axios.post('/auth/register', params);
 	return data;
 });

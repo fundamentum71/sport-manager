@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './roomVisitor.module.scss';
+//import React from 'react';
+//import styles from './roomVisitor.module.scss';
 
 function RoomVisitors() {
 	return (
