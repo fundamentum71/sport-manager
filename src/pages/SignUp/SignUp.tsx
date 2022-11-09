@@ -1,6 +1,8 @@
 import React from 'react';
+import { Navigate } from 'react-router-dom';
 import { fetchRegister } from '../../redux/auth/asyncActions';
-import { useAppDispatch } from '../../redux/hooks';
+import { selectIsAuth } from '../../redux/auth/slice';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import styles from './signup.module.scss';
 
 export type SignUpProps = {
@@ -11,6 +13,7 @@ export type SignUpProps = {
 
 function SignUp() {
 	const dispatch = useAppDispatch();
+	const isAuth = useAppSelector(selectIsAuth);
 
 	const [name, setName] = React.useState('');
 	const [password, setPassword] = React.useState('');
@@ -160,6 +163,10 @@ function SignUp() {
 	};
 
 	console.log(name, password, email, checkPolice);
+
+	if (isAuth) {
+		return <Navigate to="/" />;
+	}
 
 	return (
 		<div className={styles.wrapper}>

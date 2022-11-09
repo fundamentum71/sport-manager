@@ -1,7 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { fetchAuth } from '../../redux/auth/asyncActions';
-import { authReducer } from '../../redux/auth/slice';
 import { selectIsAuth } from '../../redux/auth/slice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import styles from './signin.module.scss';

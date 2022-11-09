@@ -96,7 +96,7 @@ function App() {
 					}
 				/>
 				<Route
-					path="/signin"
+					path="/login"
 					element={
 						<Suspense fallback={<CircularProgress color="secondary" />}>
 							<SignIn />
@@ -105,7 +105,7 @@ function App() {
 				/>
 
 				<Route
-					path="/signup"
+					path="/registration"
 					element={
 						<Suspense fallback={<CircularProgress color="secondary" />}>
 							<SignUp />
