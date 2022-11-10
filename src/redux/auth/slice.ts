@@ -1,17 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchAuth, fetchAuthMe, fetchRegister } from './asyncActions';
+import { userSchema } from './types';
 
-//type AuthTypeData = {
-//	createdAt: string;
-//	email: string;
-//	fullName: string;
-//	token: string;
-//	updatedAt: string;
-//	__v: number;
-//	_id: string;
-//};
+interface InitialState {
+	data: userSchema | null;
+	status: string;
+}
 
-const initialState = {
+const initialState: InitialState = {
 	data: null,
 	status: 'loading',
 };

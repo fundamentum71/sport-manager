@@ -5,16 +5,20 @@ import styles from './header.module.scss';
 import btns from '../../style/btns.module.scss';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { logout, selectIsAuth } from '../../redux/auth/slice';
+import { userReturne, userSchema } from '../../redux/auth/types';
 
 const Header = () => {
 	const isAuth = useAppSelector(selectIsAuth);
 	const dispatch = useAppDispatch();
+
+	const dataUser = useAppSelector((store) => store.auth.data);
+
 	const [activeListItem, setActiveListItem] = React.useState(0);
 	const listPage = [
 		//{ title: 'Превью', link: '/start', id: 0, isAuthView: false },
 		{ title: 'О сайте', link: '/about', id: 0, isAuthView: true },
 		{ title: 'Главная', link: '/', id: 1, isAuthView: true },
-		{ title: 'Профиль', link: '/profile', id: 2, isAuthView: true },
+		//{ title: 'Профиль', link: '/profile', id: 2, isAuthView: true },
 		//{ title: 'Войти', link: '/signin', id: 3 },
 		//{ title: 'Регистрация', link: '/signup', id: 4 },
 	];
@@ -35,13 +39,21 @@ const Header = () => {
 				</div>
 			</Link>
 
+			{dataUser && (
+				<Link to="/profile">
+					<div>
+						<div>{dataUser.fullName}</div>
+					</div>
+				</Link>
+			)}
+
 			<div className={styles.btns}>
 				{listPage.map((item) =>
 					item.isAuthView === isAuth ? (
 						<div className={btns.m10}>
 							<Link key={item.id} to={item.link}>
 								<button
-									onClick={() => setActiveListItem(item.id)}
+									//onClick={() => setActiveListItem(item.id)}
 									className={activeListItem === item.id ? styles.active : styles.btn}>
 									{item.title}
 								</button>

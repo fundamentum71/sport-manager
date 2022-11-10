@@ -162,8 +162,6 @@ function SignUp() {
 		}
 	};
 
-	console.log(name, password, email, checkPolice);
-
 	if (isAuth) {
 		return <Navigate to="/" />;
 	}

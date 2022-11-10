@@ -12,8 +12,8 @@ export type SignInProps = {
 
 function SignIn() {
 	const isAuth = useAppSelector(selectIsAuth);
-	const data = useAppSelector((store) => store.auth.data);
-	console.log(data);
+	//const data = useAppSelector((store) => store.auth.data);
+	//console.log(data);
 
 	const dispatch = useAppDispatch();
 
@@ -110,9 +110,6 @@ function SignIn() {
 			setFormValid(true);
 		}
 	}, [passwordError, emailError, email, password]);
-
-	console.log(password, email);
-	console.log(isAuth);
 
 	if (isAuth) {
 		return <Navigate to="/" />;

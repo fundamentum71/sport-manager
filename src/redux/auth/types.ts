@@ -1,5 +1,11 @@
-import React from 'react';
+export type userSchema = {
+	createdAt: string;
+	email: string;
+	fullName: string;
+	token: string;
+	updatedAt: string;
+	__v: number;
+	_id: string;
+};
 
-function types() {}
-
-export default types;
+export type userReturne = null | userSchema;
