@@ -5,7 +5,8 @@ import styles from './header.module.scss';
 import btns from '../../style/btns.module.scss';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { logout, selectIsAuth } from '../../redux/auth/slice';
-import { userReturne, userSchema } from '../../redux/auth/types';
+import noAvatar from '../../assets/images/no-avatar.png';
+import avatar from '../../assets/images/avatar.jpg';
 
 const Header = () => {
 	const isAuth = useAppSelector(selectIsAuth);
@@ -41,8 +42,10 @@ const Header = () => {
 
 			{dataUser && (
 				<Link to="/profile">
-					<div>
-						<div>{dataUser.fullName}</div>
+					<div className={styles.userBlock}>
+						<img className={styles.userBlock__photo} src={dataUser.avatarUrl || avatar} />
+
+						<div className={styles.userBlock__name}>{dataUser.fullName}</div>
 					</div>
 				</Link>
 			)}

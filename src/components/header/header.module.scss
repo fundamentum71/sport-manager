@@ -16,6 +16,24 @@
 	}
 }
 
+.userBlock {
+	width: 300px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 100px;
+	padding: 10px;
+	border-radius: 7px;
+	&__photo {
+		width: 30px;
+		margin-right: 10px;
+		border-radius: 50%;
+	}
+	&:hover {
+		background-color: rgb(221, 208, 255);
+	}
+}
+
 .btns {
 	display: flex;
 	width: 100%;

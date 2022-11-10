@@ -6,6 +6,11 @@ export type userSchema = {
 	updatedAt: string;
 	__v: number;
 	_id: string;
+	avatarUrl?: string;
+	preferredSport?: string;
+	age?: string;
+	gamesPlayed?: number;
+	gamesLeave?: number;
 };
 
-export type userReturne = null | userSchema;
+//export type userReturne = null | userSchema;

@@ -1,9 +1,20 @@
 import React from 'react';
 import styles from './profile.module.scss';
 import avatar from '../../assets/images/avatar.jpg';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { useAppSelector } from '../../redux/hooks';
 
 function Profile() {
+	const dataUser = useAppSelector((store) => store.auth.data);
+
+	//if (!dataUser) {
+	//	return null;
+	//}
+
+	if (!dataUser) {
+		return <Navigate to="/start" />;
+	}
+
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.row_menu}>
@@ -19,13 +30,21 @@ function Profile() {
 				</div>
 
 				<div className={styles.info_container}>
-					<div className={styles.info_name}>Имя Фамилия</div>
+					<div className={styles.info_name}>{dataUser.fullName}</div>
 					<div className={styles.info_reg}>В сети</div>
-					<div className={styles.info_reg}>Дата регистрации: 03.04.2022</div>
-					<div className={styles.info_reg}>Возраст: 27</div>
-					<div className={styles.info_statistic}>Предпочитаемый вид спорта: футбол</div>
-					<div className={styles.info_statistic}>Сыграно игр: 10</div>
-					<div className={styles.info_statistic}>Не пришел: 3</div>
+					<div className={styles.info_reg}>
+						Дата регистрации: {dataUser.createdAt.substring(0, 10)}
+					</div>
+					<div className={styles.info_reg}>Возраст: {dataUser.age || 'Нет данных'}</div>
+					<div className={styles.info_statistic}>
+						Предпочитаемый вид спорта: {dataUser.preferredSport || 'Нет данных'}
+					</div>
+					<div className={styles.info_statistic}>
+						Сыграно игр: {dataUser.gamesPlayed || 'Нет данных'}
+					</div>
+					<div className={styles.info_statistic}>
+						Не пришел: {dataUser.gamesLeave || 'Нет данных'}
+					</div>
 
 					<div className={styles.info_btns}>
 						<Link to="/editProfile">
