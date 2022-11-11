@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './editProfile.module.scss';
 import logo from '../../assets/images/logo.svg';
 import avatar from '../../assets/images/avatar.jpg';
+import ClearIcon from '@mui/icons-material/Clear';
+import { Link } from 'react-router-dom';
 
 const EditProfile = () => {
 	const [name, setName] = React.useState('');
@@ -16,13 +18,38 @@ const EditProfile = () => {
 
 	return (
 		<div className={styles.wrapper}>
-			<div className={styles.photoAvatar}>
-				<img src={avatar} />
+			<div className={styles.input_item}>
+				<input
+					id="avatarImg"
+					name="avatarImg"
+					type="file"
+					placeholder="Аватар"
+					className={styles.hidden}
+					//value={avatarImg}
+					//onChange={(e) => onChangeValue(e)}
+				/>
 			</div>
-			<div className={styles.form}>
+
+			<label htmlFor="avatarImg" className={styles.photoAvatar}>
+				{/*<div className={styles.clear}>
+					<ClearIcon />
+				</div>*/}
 				<div className={styles.logo}>
 					<img src={logo} />
 				</div>
+				<img className={styles.photoAvatar_img} src={avatar} />
+
+				<span className={styles.photoAvatar_desc}>Нажмите чтобы обновить аватар</span>
+				<button className={styles.btn_clear}>Удалить аватар</button>
+			</label>
+
+			<div className={styles.form}>
+				<Link to="/profile">
+					<div className={styles.cancel}>
+						<ClearIcon />
+					</div>
+				</Link>
+
 				<div className={styles.desc}>
 					<h2>Редактирование профиля</h2>
 					<h3>Пожалуйста, заполните поля</h3>
@@ -30,7 +57,7 @@ const EditProfile = () => {
 				<div className={styles.line}></div>
 				<div className={styles.input}>
 					<div className={styles.input_item}>
-						<label htmlFor="name">Имя*:</label>
+						<label htmlFor="name">Ваше полное имя*:</label>
 						<input
 							id="name"
 							name="name"
@@ -44,7 +71,7 @@ const EditProfile = () => {
 					</div>
 
 					<div className={styles.input_item}>
-						<label htmlFor="age">Возраст:</label>
+						<label htmlFor="age">Ваш возраст:</label>
 						<input
 							id="age"
 							name="age"
@@ -56,7 +83,7 @@ const EditProfile = () => {
 					</div>
 
 					<div className={styles.input_item}>
-						<label htmlFor="preferredSport">Вид спорта:</label>
+						<label htmlFor="preferredSport">Ваш вид спорта:</label>
 						<input
 							id="preferredSport"
 							name="preferredSport"
@@ -68,24 +95,27 @@ const EditProfile = () => {
 					</div>
 
 					<div className={styles.input_item}>
-						<label htmlFor="avatarImg">Загрузите аватар</label>
+						<label htmlFor="Город">Ваш город:</label>
 						<input
-							id="avatarImg"
-							name="avatarImg"
-							type="file"
-							placeholder="Аватар"
-							//value={avatarImg}
+							id="Город"
+							name="Город"
+							type="text"
+							placeholder="Укажите ваш город"
+							//value={preferredSport}
 							//onChange={(e) => onChangeValue(e)}
 						/>
 					</div>
 				</div>
-				<button
-					disabled={!formValid}
-					className={styles.btn}
-					// onClick={onSubmit}
-				>
-					Обновить профиль
-				</button>
+
+				<div className={styles.btns}>
+					<button
+						disabled={!formValid}
+						className={styles.btn}
+						// onClick={onSubmit}
+					>
+						Обновить профиль
+					</button>
+				</div>
 			</div>
 		</div>
 	);
