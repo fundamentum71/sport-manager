@@ -18,7 +18,7 @@ function SignIn() {
 	const dispatch = useAppDispatch();
 
 	const [password, setPassword] = React.useState('1111111');
-	const [email, setEmail] = React.useState('anna@gmail.com');
+	const [email, setEmail] = React.useState('it.kucherov@gmail.com');
 
 	const [passwordDirty, setPasswordDirty] = React.useState(false);
 	const [emailDirty, setEmailDirty] = React.useState(false);

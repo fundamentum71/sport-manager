@@ -30,7 +30,7 @@ function Profile() {
 				</div>
 
 				<div className={styles.info_container}>
-					<div className={styles.info_name}>{dataUser.fullName}</div>
+					<div className={styles.info_name}>{dataUser.fullName || 'Нет данных'}</div>
 					<div className={styles.info_reg}>В сети</div>
 					<div className={styles.info_reg}>
 						Дата регистрации: {dataUser.createdAt.substring(0, 10)}
