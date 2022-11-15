@@ -36,8 +36,8 @@ const RoomOptions: React.FC<RoomOptionsProperty> = ({
 			<div className={styles.option}>Площадка: {place}</div>
 
 			<div className={styles.btns}>
-				<button className={styles.btn}>Приду играть</button>
-				<button className={styles.btn_exit}>Не приду</button>
+				<button className={styles.btn}>Учавствую</button>
+				<button className={styles.btn_exit}>Отказаться</button>
 			</div>
 		</>
 	);

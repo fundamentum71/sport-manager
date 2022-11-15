@@ -11,6 +11,8 @@ import axios from '../../axios';
 import CartRoomInHome from '../../components/cartRoom/CartRoomInHome';
 import { userSchema } from '../../redux/auth/types';
 
+//дату создания комнаты
+
 type RoomProperty = {
 	_id: string;
 	title: string;

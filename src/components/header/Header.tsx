@@ -18,7 +18,7 @@ const Header = () => {
 	const listPage = [
 		//{ title: 'Превью', link: '/start', id: 0, isAuthView: false },
 		{ title: 'О сайте', link: '/about', id: 0, isAuthView: true },
-		{ title: 'Главная', link: '/', id: 1, isAuthView: true },
+		{ title: 'Комнаты', link: '/', id: 1, isAuthView: true },
 		//{ title: 'Профиль', link: '/profile', id: 2, isAuthView: true },
 		//{ title: 'Войти', link: '/signin', id: 3 },
 		//{ title: 'Регистрация', link: '/signup', id: 4 },

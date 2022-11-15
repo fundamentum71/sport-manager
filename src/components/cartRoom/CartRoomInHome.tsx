@@ -47,7 +47,7 @@ const CartRoomInHome: React.FC<CartRoomInHomeProperty> = ({
 							<b>Вид спорта:</b> {preferredSport}
 						</div>
 						<div className={styles.item}>
-							<b>К-во присоединившихся:</b> {joined}
+							<b>Колличество участников:</b> {joined}
 						</div>
 
 						<div className={styles.item}>
