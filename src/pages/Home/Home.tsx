@@ -4,8 +4,21 @@ import CartRoomInHome from '../../components/cartRoom/CartRoomInHome';
 import styles from './home.module.scss';
 import btns from '../../style/btns.module.scss';
 import logoPrev from '../../assets/images/logo.svg';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { fetchRooms } from '../../redux/room/asyncActions';
 
 function Home() {
+	const dispatch = useAppDispatch();
+	const { items, status } = useAppSelector((state) => state.rooms);
+
+	const isRoomsLoading = status === 'loading';
+
+	React.useEffect(() => {
+		dispatch(fetchRooms());
+	}, []);
+
+	console.log(items);
+
 	return (
 		<div className={styles.rooms}>
 			<h1>Выберите комнату или создайте свою</h1>
@@ -21,10 +34,21 @@ function Home() {
 					</div>
 				</div>
 				<div className={styles.items}>
-					<CartRoomInHome />
-					<CartRoomInHome />
-					<CartRoomInHome />
-					<CartRoomInHome />
+					{(isRoomsLoading ? [...Array(5)] : items).map((obj, index) =>
+						isRoomsLoading ? (
+							<CartRoomInHome key={index} isLoading={true} />
+						) : (
+							<CartRoomInHome
+								key={obj._id}
+								_id={obj._id}
+								title={obj.title}
+								preferredSport={obj.preferredSport}
+								time={obj.time}
+								date={obj.data}
+								place={obj.place}
+							/>
+						),
+					)}
 				</div>
 			</div>
 		</div>

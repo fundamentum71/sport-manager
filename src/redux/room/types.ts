@@ -1,3 +1,5 @@
+import { userSchema } from '../auth/types';
+
 export type roomSchema = {
 	_id: string;
 	title: string;
@@ -5,6 +7,8 @@ export type roomSchema = {
 	time: string;
 	date: string;
 	place: string;
+	user: userSchema;
+	isLoading?: boolean;
 };
 
 export interface roomsSliceState {

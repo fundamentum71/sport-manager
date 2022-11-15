@@ -3,7 +3,9 @@ import styles from './cartRoomInHome.module.scss';
 import EditIcon from '@mui/icons-material/Edit';
 import { Link } from 'react-router-dom';
 
-const CartRoomInHome = () => {
+import { roomSchema } from '../../redux/room/types';
+
+const CartRoomInHome = ({ _id, title, preferredSport, time, date, place, isLoading }) => {
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.items}>
