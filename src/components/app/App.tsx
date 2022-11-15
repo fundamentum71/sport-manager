@@ -71,7 +71,7 @@ function App() {
 				/>*/}
 
 				<Route
-					path="/room"
+					path="/rooms/:id"
 					element={
 						<Suspense fallback={<CircularProgress color="secondary" />}>
 							<Room />

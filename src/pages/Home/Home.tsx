@@ -17,8 +17,6 @@ function Home() {
 		dispatch(fetchRooms());
 	}, []);
 
-	console.log(items);
-
 	return (
 		<div className={styles.rooms}>
 			<h1>Выберите комнату или создайте свою</h1>

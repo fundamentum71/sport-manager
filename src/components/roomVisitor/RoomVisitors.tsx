@@ -1,7 +1,11 @@
 //import React from 'react';
 //import styles from './roomVisitor.module.scss';
 
-function RoomVisitors() {
+type RoomVisitorsProps = {
+	visitors: string[] | undefined;
+};
+
+const RoomVisitors: React.FC<RoomVisitorsProps> = ({ visitors }) => {
 	return (
 		<>
 			<h2>Список человек в комнате (Всего: 6)</h2>
@@ -21,6 +25,6 @@ function RoomVisitors() {
 			<p>Имя Фамилия (Не в сети)</p>
 		</>
 	);
-}
+};
 
 export default RoomVisitors;

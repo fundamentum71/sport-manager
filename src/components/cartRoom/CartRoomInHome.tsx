@@ -4,7 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Link } from 'react-router-dom';
 import { userSchema } from '../../redux/auth/types';
 
-type CartRoomInHome = {
+export type CartRoomInHomeProperty = {
 	_id?: string;
 	title?: string;
 	preferredSport?: string;
@@ -17,9 +17,10 @@ type CartRoomInHome = {
 	joined?: string[];
 	visitors?: string[];
 	viewsCount?: number;
+	isFullPost?: boolean;
 };
 
-const CartRoomInHome: React.FC<CartRoomInHome> = ({
+const CartRoomInHome: React.FC<CartRoomInHomeProperty> = ({
 	_id,
 	title,
 	preferredSport,
@@ -29,6 +30,7 @@ const CartRoomInHome: React.FC<CartRoomInHome> = ({
 	isLoading,
 	user,
 	joined,
+	isFullPost,
 }) => {
 	return (
 		<div className={styles.wrapper}>
@@ -37,7 +39,7 @@ const CartRoomInHome: React.FC<CartRoomInHome> = ({
 			) : (
 				<>
 					<div className={styles.items}>
-						<h2>{title}</h2>
+						<h2>{isFullPost ? title : <Link to={`/rooms/${_id}`}>{title}</Link>}</h2>
 						<div className={styles.item}>
 							<b>Создал комнату:</b> {user ? user.fullName : ''}
 						</div>
@@ -59,7 +61,7 @@ const CartRoomInHome: React.FC<CartRoomInHome> = ({
 						</div>
 					</div>
 					<div className={styles.btns}>
-						<Link to="/room">
+						<Link to={`/rooms/${_id}`}>
 							<button className={styles.btn}>Войти в комнату</button>
 						</Link>
 						<Link to="/addroom">
