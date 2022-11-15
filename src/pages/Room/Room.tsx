@@ -8,7 +8,7 @@ import RoomInputChat from '../../components/roomInputChat/RoomInputChat';
 import RoomChat from '../../components/roomChat/RoomChat';
 import { useParams } from 'react-router-dom';
 import axios from '../../axios';
-import CartRoomInHome, { CartRoomInHomeProperty } from '../../components/cartRoom/CartRoomInHome';
+import CartRoomInHome from '../../components/cartRoom/CartRoomInHome';
 import { userSchema } from '../../redux/auth/types';
 
 type RoomProperty = {
