@@ -100,8 +100,8 @@ const AddRoom = () => {
 			place,
 		};
 
-		axios
-			.post(`/rooms`)
+		await axios
+			.post(`/rooms`, addRoomData)
 
 			.catch((err) => {
 				console.warn(err);
