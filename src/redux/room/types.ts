@@ -9,6 +9,9 @@ export type roomSchema = {
 	place: string;
 	user: userSchema;
 	isLoading?: boolean;
+	joined?: string[];
+	visitors?: string[];
+	viewsCount?: number;
 };
 
 export interface roomsSliceState {

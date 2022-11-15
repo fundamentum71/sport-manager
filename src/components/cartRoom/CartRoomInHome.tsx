@@ -2,44 +2,74 @@ import React from 'react';
 import styles from './cartRoomInHome.module.scss';
 import EditIcon from '@mui/icons-material/Edit';
 import { Link } from 'react-router-dom';
+import { userSchema } from '../../redux/auth/types';
 
-import { roomSchema } from '../../redux/room/types';
+type CartRoomInHome = {
+	_id?: string;
+	title?: string;
+	preferredSport?: string;
+	time?: string;
+	date?: string;
+	place?: string;
+	user?: userSchema;
+	isLoading?: boolean;
+	key?: number;
+	joined?: string[];
+	visitors?: string[];
+	viewsCount?: number;
+};
 
-const CartRoomInHome = ({ _id, title, preferredSport, time, date, place, isLoading }) => {
+const CartRoomInHome: React.FC<CartRoomInHome> = ({
+	_id,
+	title,
+	preferredSport,
+	time,
+	date,
+	place,
+	isLoading,
+	user,
+	joined,
+}) => {
 	return (
 		<div className={styles.wrapper}>
-			<div className={styles.items}>
-				<h2>Название комнаты</h2>
-				<div className={styles.item}>
-					<b>Создал комнату:</b> Пупкин В.С.
-				</div>
-				<div className={styles.item}>
-					<b>Вид спорта:</b> Баскетбол
-				</div>
-				<div className={styles.item}>
-					<b>К-во присоединившихся:</b> 10
-				</div>
+			{isLoading ? (
+				'загрузка'
+			) : (
+				<>
+					<div className={styles.items}>
+						<h2>{title}</h2>
+						<div className={styles.item}>
+							<b>Создал комнату:</b> {user ? user.fullName : ''}
+						</div>
+						<div className={styles.item}>
+							<b>Вид спорта:</b> {preferredSport}
+						</div>
+						<div className={styles.item}>
+							<b>К-во присоединившихся:</b> {joined}
+						</div>
 
-				<div className={styles.item}>
-					<b>Площадка:</b> Площадка на Набережной
-				</div>
-				<div className={styles.item}>
-					<b>Дата:</b> 03.04.2022
-				</div>
-				<div className={styles.item}>
-					<b>Время:</b> 14:00
-				</div>
-			</div>
-			<div className={styles.btns}>
-				<Link to="/room">
-					<button className={styles.btn}>Войти в комнату</button>
-				</Link>
-				<Link to="/addroom">
-					<button className={styles.btn_edit}>
-						<EditIcon />
-					</button>
-				</Link>
-			</div>
+						<div className={styles.item}>
+							<b>Площадка:</b> {place}
+						</div>
+						<div className={styles.item}>
+							<b>Дата:</b> {date}
+						</div>
+						<div className={styles.item}>
+							<b>Время:</b> {time}
+						</div>
+					</div>
+					<div className={styles.btns}>
+						<Link to="/room">
+							<button className={styles.btn}>Войти в комнату</button>
+						</Link>
+						<Link to="/addroom">
+							<button className={styles.btn_edit}>
+								<EditIcon />
+							</button>
+						</Link>
+					</div>
+				</>
+			)}
 		</div>
 	);
 };

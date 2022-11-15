@@ -44,8 +44,10 @@ function Home() {
 								title={obj.title}
 								preferredSport={obj.preferredSport}
 								time={obj.time}
-								date={obj.data}
+								date={obj.date}
 								place={obj.place}
+								user={obj.user}
+								joined={obj.joined.length}
 							/>
 						),
 					)}
