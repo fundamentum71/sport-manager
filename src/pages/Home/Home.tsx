@@ -49,7 +49,7 @@ function Home() {
 								place={obj.place}
 								user={obj.user}
 								joined={obj.joined.length}
-								createdAt={obj.createdAt}
+								dateCreatedRoom={obj.dateCreatedRoom}
 							/>
 						),
 					)}

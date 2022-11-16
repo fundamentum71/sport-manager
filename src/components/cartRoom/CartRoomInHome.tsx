@@ -18,7 +18,7 @@ export type CartRoomInHomeProperty = {
 	visitors?: string[];
 	viewsCount?: number;
 	isFullPost?: boolean;
-	createdAt?: string;
+	dateCreatedRoom?: string;
 };
 
 const CartRoomInHome: React.FC<CartRoomInHomeProperty> = ({
@@ -32,7 +32,7 @@ const CartRoomInHome: React.FC<CartRoomInHomeProperty> = ({
 	user,
 	joined,
 	isFullPost,
-	createdAt,
+	dateCreatedRoom,
 }) => {
 	return (
 		<div className={styles.wrapper}>
@@ -72,7 +72,7 @@ const CartRoomInHome: React.FC<CartRoomInHomeProperty> = ({
 							</button>
 						</Link>
 					</div>
-					<div>Дата создания комнаты: {createdAt?.replace('T', ' ').substring(0, 16)}</div>
+					<div>Дата создания комнаты: {dateCreatedRoom}</div>
 				</>
 			)}
 		</div>

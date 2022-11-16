@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './addRoom.module.scss';
 import axios from '../../axios';
 import { Navigate } from 'react-router-dom';
+import { stringify } from 'querystring';
 
 type addRoomProps = {
 	title: string;
@@ -9,6 +10,7 @@ type addRoomProps = {
 	date: string;
 	time: string;
 	place: string;
+	dateCreatedRoom: string;
 };
 
 const AddRoom = () => {
@@ -95,12 +97,14 @@ const AddRoom = () => {
 	};
 
 	const onSubmit = async () => {
+		const dateCreatedRoom = new Date().toLocaleString();
 		const addRoomData: addRoomProps = {
 			title,
 			preferredSport,
 			date,
 			time,
 			place,
+			dateCreatedRoom,
 		};
 
 		await axios
