@@ -7,14 +7,15 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { logout, selectIsAuth } from '../../redux/auth/slice';
 import noAvatar from '../../assets/images/no-avatar.png';
 import avatar from '../../assets/images/avatar.jpg';
+import { fetchAuthMe } from '../../redux/auth/asyncActions';
 
 const Header = () => {
 	const isAuth = useAppSelector(selectIsAuth);
 	const dispatch = useAppDispatch();
-
 	const dataUser = useAppSelector((store) => store.auth.data);
+	const LoadedDataUser = useAppSelector((store) => store.auth.status);
 
-	const [activeListItem, setActiveListItem] = React.useState(0);
+	const [activeListItem, setActiveListItem] = React.useState(-1);
 	const listPage = [
 		//{ title: 'Превью', link: '/start', id: 0, isAuthView: false },
 		{ title: 'О сайте', link: '/about', id: 0, isAuthView: true },
@@ -29,8 +30,17 @@ const Header = () => {
 	};
 
 	const logOut = () => {
-		dispatch(logout());
+		if (window.confirm('Вы действительно хотите выйти из аккаунта?')) {
+			//выход из аккаунта
+			dispatch(logout());
+			//удаление токена из localStorage
+			window.localStorage.removeItem('token');
+		}
 	};
+
+	React.useEffect(() => {
+		console.log('isAuth', isAuth, 'dataUser', dataUser, LoadedDataUser);
+	});
 
 	return (
 		<div className={styles.wrapper}>
@@ -40,7 +50,7 @@ const Header = () => {
 				</div>
 			</Link>
 
-			{dataUser && (
+			{dataUser?.fullName && (
 				<Link to="/profile">
 					<div className={styles.userBlock}>
 						<img className={styles.userBlock__photo} src={dataUser.avatarUrl || avatar} />

@@ -66,8 +66,11 @@ const authSlice = createSlice({
 	},
 });
 
+type selectIsAuthType = {
+	auth: InitialState;
+};
 //авторизован ли пользователь
-export const selectIsAuth = (state: any) => Boolean(state.auth.data);
+export const selectIsAuth = (state: selectIsAuthType) => Boolean(state.auth.data);
 
 export const authReducer = authSlice.reducer;
 

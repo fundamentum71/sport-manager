@@ -9,6 +9,9 @@ import Profile from '../../pages/Profile/Profile';
 import Room from '../../pages/Room/Room';
 import StartPage from '../../pages/StartPage/StartPage';
 import CircularProgress from '@mui/material/CircularProgress';
+import { fetchAuthMe } from '../../redux/auth/asyncActions';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { selectIsAuth } from '../../redux/auth/slice';
 //import styles from './app.module.scss';
 
 const NotFound = React.lazy(
@@ -22,6 +25,12 @@ const SignUp = React.lazy(
 );
 
 function App() {
+	const dispatch = useAppDispatch();
+	//const isAuth = useAppSelector(selectIsAuth);
+	//проверка на авторизацию
+	React.useEffect(() => {
+		dispatch(fetchAuthMe());
+	}, []);
 	return (
 		<Routes>
 			<Route path="/" element={<MainLayout />}>

@@ -3,7 +3,9 @@ import styles from './editProfile.module.scss';
 import logo from '../../assets/images/logo.svg';
 import avatar from '../../assets/images/avatar.jpg';
 import ClearIcon from '@mui/icons-material/Clear';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { useAppSelector } from '../../redux/hooks';
+import { selectIsAuth } from '../../redux/auth/slice';
 
 const EditProfile = () => {
 	const [name, setName] = React.useState('');
@@ -15,6 +17,12 @@ const EditProfile = () => {
 	const [nameError, setNameError] = React.useState('');
 
 	const [formValid, setFormValid] = React.useState(false);
+
+	const isAuth = useAppSelector(selectIsAuth);
+
+	if (!isAuth) {
+		return <Navigate to="/start" />;
+	}
 
 	return (
 		<div className={styles.wrapper}>

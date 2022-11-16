@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './addRoom.module.scss';
 import axios from '../../axios';
+import { Navigate } from 'react-router-dom';
 
 type addRoomProps = {
 	title: string;
@@ -16,6 +17,8 @@ const AddRoom = () => {
 	const [date, setDate] = React.useState('');
 	const [time, setTime] = React.useState('');
 	const [place, setPlace] = React.useState('');
+
+	const [toRoomPage, setToRoomPage] = React.useState('');
 
 	const [formValid, setFormValid] = React.useState(false);
 
@@ -102,6 +105,16 @@ const AddRoom = () => {
 
 		await axios
 			.post(`/rooms`, addRoomData)
+			.then((res) => {
+				setToRoomPage(res.data._id);
+			})
+			.then(() => {
+				setTitle('');
+				setPreferredSport('');
+				setDate('');
+				setTime('');
+				setPlace('');
+			})
 
 			.catch((err) => {
 				console.warn(err);
@@ -130,62 +143,60 @@ const AddRoom = () => {
 		//		return alert('Не удалось зарегистрироваться!');
 		//	}
 
-		//	setTitle('');
-		//	setPreferredSport('');
-		//	setDate('');
-		//	setTime('');
-		//	setPlace('');
 		//}
 	};
 
 	console.log(title, preferredSport, date, time, place);
 
 	return (
-		<section className={styles.wrapper}>
-			<div>
-				<h2>Создание комнаты</h2>
-				<button className={styles.btn_red}>Удалить комнату</button>
-			</div>
-			<div className={styles.options}>
-				<label htmlFor=""> Название комнаты</label>
-				<input
-					name="title"
-					type="text"
-					placeholder="Введите название комнаты"
-					value={title}
-					onChange={(e) => onChangeValue(e)}
-				/>
-				<label htmlFor="">Вид спорта</label>
-				<input
-					name="preferredSport"
-					type="text"
-					placeholder="Вид спорта"
-					value={preferredSport}
-					onChange={(e) => onChangeValue(e)}
-				/>
-				<label htmlFor="">Дата</label>
-				<input
-					name="date"
-					type="date"
-					placeholder=""
-					value={date}
-					onChange={(e) => onChangeValue(e)}
-				/>
-				<label htmlFor="">Время</label>
-				<input name="time" type="time" value={time} onChange={(e) => onChangeValue(e)} />
-				<label htmlFor="">Площадка</label>
-				<input
-					name="place"
-					type="text"
-					placeholder="Введите адрес"
-					value={place}
-					onChange={(e) => onChangeValue(e)}
-				/>
-				<button className={styles.btn} onClick={onSubmit}>
-					Создать комнату
-				</button>
-			</div>
-		</section>
+		<>
+			{toRoomPage != '' && <Navigate to={`/rooms/${toRoomPage}`} />}
+			<section className={styles.wrapper}>
+				<div>
+					<h2>Создание комнаты</h2>
+					<button className={styles.btn_red}>Удалить комнату</button>
+				</div>
+				<div className={styles.options}>
+					<label htmlFor=""> Название комнаты</label>
+					<input
+						name="title"
+						type="text"
+						placeholder="Введите название комнаты"
+						value={title}
+						onChange={(e) => onChangeValue(e)}
+					/>
+					<label htmlFor="">Вид спорта</label>
+					<input
+						name="preferredSport"
+						type="text"
+						placeholder="Вид спорта"
+						value={preferredSport}
+						onChange={(e) => onChangeValue(e)}
+					/>
+					<label htmlFor="">Дата</label>
+					<input
+						name="date"
+						type="date"
+						placeholder=""
+						value={date}
+						onChange={(e) => onChangeValue(e)}
+					/>
+					<label htmlFor="">Время</label>
+					<input name="time" type="time" value={time} onChange={(e) => onChangeValue(e)} />
+					<label htmlFor="">Площадка</label>
+					<input
+						name="place"
+						type="text"
+						placeholder="Введите адрес"
+						value={place}
+						onChange={(e) => onChangeValue(e)}
+					/>
+					<button className={styles.btn} onClick={onSubmit}>
+						Создать комнату
+					</button>
+				</div>
+			</section>
+		</>
 	);
 };
 
