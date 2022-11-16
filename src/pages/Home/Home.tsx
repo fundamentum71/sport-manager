@@ -17,6 +17,8 @@ function Home() {
 		dispatch(fetchRooms());
 	}, []);
 
+	console.log(items);
+
 	return (
 		<div className={styles.rooms}>
 			<h1>Выберите комнату или создайте свою</h1>
@@ -32,6 +34,7 @@ function Home() {
 					</div>
 				</div>
 				<div className={styles.items}>
+					{items.length == 0 && <h2>Список комнат пуст...</h2>}
 					{(isRoomsLoading ? [...Array(5)] : items).map((obj, index) =>
 						isRoomsLoading ? (
 							<CartRoomInHome key={index} isLoading={true} />
@@ -46,6 +49,7 @@ function Home() {
 								place={obj.place}
 								user={obj.user}
 								joined={obj.joined.length}
+								createdAt={obj.createdAt}
 							/>
 						),
 					)}

@@ -63,8 +63,8 @@ const Header = () => {
 			<div className={styles.btns}>
 				{listPage.map((item) =>
 					item.isAuthView === isAuth ? (
-						<div className={btns.m10}>
-							<Link key={item.id} to={item.link}>
+						<div key={item.id} className={btns.m10}>
+							<Link to={item.link}>
 								<button
 									//onClick={() => setActiveListItem(item.id)}
 									className={activeListItem === item.id ? styles.active : styles.btn}>
