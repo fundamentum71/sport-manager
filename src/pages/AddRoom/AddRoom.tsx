@@ -10,7 +10,7 @@ type addRoomProps = {
 	date: string;
 	time: string;
 	place: string;
-	dateCreatedRoom: string;
+	//dateCreatedRoom: string;
 };
 
 const AddRoom = () => {
@@ -97,14 +97,14 @@ const AddRoom = () => {
 	};
 
 	const onSubmit = async () => {
-		const dateCreatedRoom = new Date().toLocaleString();
+		//const dateCreatedRoom = new Date().toLocaleString();
 		const addRoomData: addRoomProps = {
 			title,
 			preferredSport,
 			date,
 			time,
 			place,
-			dateCreatedRoom,
+			//dateCreatedRoom,
 		};
 
 		await axios
