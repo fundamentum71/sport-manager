@@ -10,7 +10,6 @@ type addRoomProps = {
 	date: string;
 	time: string;
 	place: string;
-	//dateCreatedRoom: string;
 };
 
 const AddRoom = () => {
@@ -20,73 +19,77 @@ const AddRoom = () => {
 	const [time, setTime] = React.useState('');
 	const [place, setPlace] = React.useState('');
 
+	//ошибки
+	const [errorTitle, setErrorTitle] = React.useState('');
+	const [errorPreferredSport, setErrorPreferredSport] = React.useState('');
+	const [errorDate, setErrorDate] = React.useState('');
+	const [errorTime, setErrorTime] = React.useState('');
+	const [errorPlace, setErrorPlace] = React.useState('');
+
 	const [toRoomPage, setToRoomPage] = React.useState('');
 
 	const [formValid, setFormValid] = React.useState(false);
+
+	//проверка на валидность формы
+	React.useEffect(() => {
+		if (errorTitle || errorPreferredSport || errorDate || errorTime || errorPlace) {
+			setFormValid(false);
+		} else {
+			setFormValid(true);
+		}
+	}, [errorTitle, errorPreferredSport, errorDate, errorTime, errorPlace]);
 
 	const onChangeValue = (e: any) => {
 		switch (e.target.name) {
 			case 'title':
 				setTitle(e.target.value);
 
-				//if (!e.target.value) {
-				//	setNameError('Поле является обязательным');
-				//} else {
-				//	setNameError('');
-				//}
+				if (!e.target.value) {
+					setErrorTitle('Поле является обязательным');
+				} else {
+					setErrorTitle('');
+				}
 
 				break;
 			case 'preferredSport':
 				setPreferredSport(e.target.value);
 
-				//if (!e.target.value.match(re)) {
-				//	setEmailError('Введите вашу почту');
-				//	if (!e.target.value) {
-				//		setEmailError('Поле является обязательным');
-				//	}
-				//} else {
-				//	setEmailError('');
-				//}
+				if (!e.target.value) {
+					setErrorPreferredSport('Поле является обязательным');
+				} else {
+					setErrorPreferredSport('');
+				}
 
 				break;
 			case 'date':
 				setDate(e.target.value);
 
-				//if (e.target.value.length < 7 || e.target.value.length > 16) {
-				//	setPasswordError('Пароль должнем быть от 7 до 16 символов');
-				//	if (!e.target.value) {
-				//		setPasswordError('Поле является обязательным');
-				//	}
-				//} else {
-				//	setPasswordError('');
-				//}
+				if (!e.target.value) {
+					setErrorDate('Поле является обязательным');
+				} else {
+					setErrorDate('');
+				}
 
 				break;
 
 			case 'time':
 				setTime(e.target.value);
 
-				//if (e.target.value.length < 7 || e.target.value.length > 16) {
-				//	setPasswordError('Пароль должнем быть от 7 до 16 символов');
-				//	if (!e.target.value) {
-				//		setPasswordError('Поле является обязательным');
-				//	}
-				//} else {
-				//	setPasswordError('');
-				//}
+				if (!e.target.value) {
+					setErrorTime('Поле является обязательным');
+				} else {
+					setErrorTime('');
+				}
 
 				break;
 			case 'place':
 				setPlace(e.target.value);
 
-				//if (e.target.value.length < 7 || e.target.value.length > 16) {
-				//	setPasswordError('Пароль должнем быть от 7 до 16 символов');
-				//	if (!e.target.value) {
-				//		setPasswordError('Поле является обязательным');
-				//	}
-				//} else {
-				//	setPasswordError('');
-				//}
+				if (!e.target.value) {
+					setErrorPlace('Поле является обязательным');
+				} else {
+					setErrorPlace('');
+				}
 
 				break;
 
@@ -97,57 +100,62 @@ const AddRoom = () => {
 	};
 
 	const onSubmit = async () => {
-		//const dateCreatedRoom = new Date().toLocaleString();
 		const addRoomData: addRoomProps = {
 			title,
 			preferredSport,
 			date,
 			time,
 			place,
-			//dateCreatedRoom,
 		};
 
-		await axios
-			.post(`/rooms`, addRoomData)
-			.then((res) => {
-				setToRoomPage(res.data._id);
-			})
-			.then(() => {
-				setTitle('');
-				setPreferredSport('');
-				setDate('');
-				setTime('');
-				setPlace('');
-			})
+		if (formValid) {
+			await axios
+				.post(`/rooms`, addRoomData)
+				.then((res) => {
+					setToRoomPage(res.data._id);
+				})
+				.then(() => {
+					//очитска формы
+					setTitle('');
+					setPreferredSport('');
+					setDate('');
+					setTime('');
+					setPlace('');
+					//очистка ошибок
+					setErrorTitle('');
+					setErrorPreferredSport('');
+					setErrorDate('');
+					setErrorTime('');
+					setErrorPlace('');
+				})
 
-			.catch((err) => {
-				console.warn(err);
-				alert('Ошибка при создании комнаты');
-			})
-			.finally(() => {
-				//setIsLoading(false);
-			});
+				.catch((err) => {
+					console.warn(err);
+					alert('Ошибка при создании комнаты');
+				})
+				.finally(() => {
+					//setIsLoading(false);
+				});
 
-		//if (formValid) {
-		//	const data = await dispatch(fetchRegister(addRoomData));
+			//если пользователь нажмет сабмит с незаполненным полем
+			if (title == '') {
+				setErrorTitle('Поле является обязательным');
+			}
 
-		//if (name == '') {
-		//	setNameError('Поле является обязательным');
-		//}
+			if (preferredSport == '') {
+				setErrorPreferredSport('Поле является обязательным');
+			}
 
-		//if (email == '') {
-		//	setEmailError('Поле является обязательным');
-		//}
-
-		//if (password == '') {
-		//	setPasswordError('Поле является обязательным');
-		//}
-
-		//	if (!data.payload) {
-		//		return alert('Не удалось зарегистрироваться!');
-		//	}
-
-		//}
+			if (date == '') {
+				setErrorDate('Поле является обязательным');
+			}
+			if (time == '') {
+				setErrorTime('Поле является обязательным');
+			}
+			if (place == '') {
+				setErrorPlace('Поле является обязательным');
+			}
+		}
 	};
 
 	return (
@@ -160,6 +168,12 @@ const AddRoom = () => {
 				</div>
 				<div className={styles.options}>
 					<label htmlFor=""> Название комнаты</label>
+					{errorTitle && (
+						<div
+							style={{ color: 'red', fontSize: '0.8rem', textAlign: 'center', marginTop: '-14px' }}>
+							{errorTitle}
+						</div>
+					)}
 					<input
 						name="title"
 						type="text"
@@ -167,7 +181,14 @@ const AddRoom = () => {
 						value={title}
 						onChange={(e) => onChangeValue(e)}
 					/>
+
 					<label htmlFor="">Вид спорта</label>
+					{errorPreferredSport && (
+						<div
+							style={{ color: 'red', fontSize: '0.8rem', textAlign: 'center', marginTop: '-14px' }}>
+							{errorPreferredSport}
+						</div>
+					)}
 					<input
 						name="preferredSport"
 						type="text"
@@ -175,7 +196,14 @@ const AddRoom = () => {
 						value={preferredSport}
 						onChange={(e) => onChangeValue(e)}
 					/>
+
 					<label htmlFor="">Дата</label>
+					{errorDate && (
+						<div
+							style={{ color: 'red', fontSize: '0.8rem', textAlign: 'center', marginTop: '-14px' }}>
+							{errorDate}
+						</div>
+					)}
 					<input
 						name="date"
 						type="date"
@@ -183,9 +211,23 @@ const AddRoom = () => {
 						value={date}
 						onChange={(e) => onChangeValue(e)}
 					/>
+
 					<label htmlFor="">Время</label>
+					{errorTime && (
+						<div
+							style={{ color: 'red', fontSize: '0.8rem', textAlign: 'center', marginTop: '-14px' }}>
+							{errorTime}
+						</div>
+					)}
 					<input name="time" type="time" value={time} onChange={(e) => onChangeValue(e)} />
+
 					<label htmlFor="">Площадка</label>
+					{errorPlace && (
+						<div
+							style={{ color: 'red', fontSize: '0.8rem', textAlign: 'center', marginTop: '-14px' }}>
+							{errorPlace}
+						</div>
+					)}
 					<input
 						name="place"
 						type="text"
@@ -193,7 +235,8 @@ const AddRoom = () => {
 						value={place}
 						onChange={(e) => onChangeValue(e)}
 					/>
-					<button className={styles.btn} onClick={onSubmit}>
+
+					<button disabled={!formValid} className={styles.btn} onClick={onSubmit}>
 						Создать комнату
 					</button>
 				</div>
