@@ -1,9 +1,9 @@
 .wrapper {
 	width: 1150px;
-	margin: 20px auto;
-	//box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.06), 0px 6px 10px rgba(0, 0, 0, 0.04);
-	border: 2px solid #939191;
-	padding: 15px;
+	margin: 3px auto;
+	box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.06), 0px 6px 10px rgba(0, 0, 0, 0.04);
+	//border: 2px solid #939191;
+	padding: 2px 15px 2px 15px;
 	border-radius: 5px;
 	position: relative;
 	transition: 0.6s;
@@ -26,11 +26,11 @@
 		color: #ffffff;
 		font-weight: 800;
 		width: 150px;
-		height: 30px;
+		height: 25px;
 		border-radius: 5px;
 		border: none;
 		padding: 0 10px;
-		margin: 10px;
+		margin: 5px;
 		background-color: #34a22a;
 		cursor: pointer;
 		//transition: 0.6s;
@@ -44,7 +44,7 @@
 		background-color: #ffffff;
 		border: none;
 		cursor: pointer;
-		margin: 10px;
+		margin: 5px;
 		margin-right: 20px;
 		//opacity: 0;
 		display: none;

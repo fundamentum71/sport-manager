@@ -25,28 +25,15 @@ const ListRoomInHome: React.FC<CartRoomInHomeProperty> = ({
 				<>
 					<div className={styles.items}>
 						<div className={styles.item}>
-							<b>Название комнаты:</b>{' '}
-							<p>{isFullPost ? title : <Link to={`/rooms/${_id}`}>{title}</Link>}</p>
+							{isFullPost ? title : <Link to={`/rooms/${_id}`}>{title}</Link>}
 						</div>
-						<div className={styles.item}>
-							<b>Создал комнату:</b> <p>{user ? user.fullName : ''}</p>
-						</div>
-						<div className={styles.item}>
-							<b>Вид спорта:</b> <p>{preferredSport}</p>
-						</div>
-						<div className={styles.item}>
-							<b>Колличество участников:</b> <p>{joined}</p>
-						</div>
+						<div className={styles.item}>{user ? user.fullName : ''}</div>
+						<div className={styles.item}>{preferredSport}</div>
+						<div className={styles.item}>{joined}</div>
 
-						<div className={styles.item}>
-							<b>Площадка:</b> <p>{place}</p>
-						</div>
-						<div className={styles.item}>
-							<b>Дата:</b> <p>{date}</p>
-						</div>
-						<div className={styles.item}>
-							<b>Время:</b> <p>{time}</p>
-						</div>
+						<div className={styles.item}>{place}</div>
+						<div className={styles.item}>{date}</div>
+						<div className={styles.item}>{time}</div>
 					</div>
 					<div className={styles.btns}>
 						<Link to={`/rooms/${_id}`}>

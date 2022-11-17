@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './addRoom.module.scss';
 import axios from '../../axios';
 import { Navigate } from 'react-router-dom';
-import { stringify } from 'querystring';
+import logoPrev from '../../assets/images/logo.svg';
 
 type addRoomProps = {
 	title: string;
@@ -164,7 +164,10 @@ const AddRoom = () => {
 			<section className={styles.wrapper}>
 				<div>
 					<h2>Создание комнаты</h2>
-					<button className={styles.btn_red}>Удалить комнату</button>
+					<div className={styles.logoPrev}>
+						<img src={logoPrev} alt="logo" />
+					</div>
+					{/*<button className={styles.btn_red}>Удалить комнату</button>*/}
 				</div>
 				<div className={styles.options}>
 					<label htmlFor=""> Название комнаты</label>

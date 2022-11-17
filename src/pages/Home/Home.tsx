@@ -9,6 +9,7 @@ import logoPrev from '../../assets/images/logo.svg';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { fetchRooms } from '../../redux/room/asyncActions';
 import ListRoomInHome from '../../components/listRoomInHome/ListRoomInHome';
+import ListHeaderRoomInHome from '../../components/listHeaderRoomInHome/ListHeaderRoomInHome';
 
 import styles from './home.module.scss';
 import btns from '../../style/btns.module.scss';
@@ -97,6 +98,7 @@ function Home() {
 				{/* Вывод по списку */}
 				{view == 'list' && (
 					<div className={styles.wrapperList}>
+						<ListHeaderRoomInHome />
 						<div className={styles.itemsList}>
 							{/*<ListRoomInHome />*/}
 
