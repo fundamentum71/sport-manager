@@ -92,11 +92,28 @@ function Home() {
 				{checkRoomList && (
 					<div className={styles.wrapperList}>
 						<div className={styles.itemsList}>
-							<ListRoomInHome />
-							<ListRoomInHome />
-							<ListRoomInHome />
-							<ListRoomInHome />
-							<ListRoomInHome />
+							{/*<ListRoomInHome />*/}
+
+							{items.length === 0 && <h2>Список комнат пуст...</h2>}
+
+							{(isRoomsLoading ? [...Array(5)] : items).map((obj, index) =>
+								isRoomsLoading ? (
+									<ListRoomInHome key={index} isLoading={true} />
+								) : (
+									<ListRoomInHome
+										key={obj._id}
+										_id={obj._id}
+										title={obj.title}
+										preferredSport={obj.preferredSport}
+										time={obj.time}
+										date={obj.date}
+										place={obj.place}
+										user={obj.user}
+										joined={obj.joined.length}
+										dateCreatedRoom={obj.dateCreatedRoom}
+									/>
+								),
+							)}
 						</div>
 						<div className={btns.m20}>
 							<Link to="/addroom">
