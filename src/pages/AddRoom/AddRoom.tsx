@@ -150,8 +150,6 @@ const AddRoom = () => {
 		//}
 	};
 
-	console.log(title, preferredSport, date, time, place);
-
 	return (
 		<>
 			{toRoomPage != '' && <Navigate to={`/rooms/${toRoomPage}`} />}

@@ -8,7 +8,7 @@ import RoomInputChat from '../../components/roomInputChat/RoomInputChat';
 import RoomChat from '../../components/roomChat/RoomChat';
 import { useParams } from 'react-router-dom';
 import axios from '../../axios';
-import CartRoomInHome from '../../components/cartRoom/CartRoomInHome';
+import CartRoomInHome from '../../components/cartRoomInHome/CartRoomInHome';
 import { userSchema } from '../../redux/auth/types';
 
 //дату создания комнаты
@@ -48,8 +48,6 @@ const Room = () => {
 				setIsLoading(false);
 			});
 	}, []);
-
-	console.log(data);
 
 	if (isLoading) {
 		return <CartRoomInHome isLoading={isLoading} isFullPost />;

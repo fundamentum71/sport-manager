@@ -13,7 +13,6 @@ export type SignInProps = {
 function SignIn() {
 	const isAuth = useAppSelector(selectIsAuth);
 	//const data = useAppSelector((store) => store.auth.data);
-	//console.log(data);
 
 	const dispatch = useAppDispatch();
 

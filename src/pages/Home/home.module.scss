@@ -1,6 +1,7 @@
 .rooms {
 	max-width: 1200px;
 	margin: 30px auto 0 auto;
+	position: relative;
 	h1 {
 		text-align: center;
 		margin-bottom: 40px;
@@ -33,7 +34,13 @@
 	justify-content: space-between;
 }
 
-.items {
+.checkRoom {
+	position: absolute;
+	top: 1px;
+	right: 1px;
+}
+
+.itemsCart {
 	width: 900px;
 	height: 68vh;
 	overflow: auto;
@@ -60,5 +67,37 @@
 	}
 	&:active {
 		transform: scale(1.03);
+	}
+}
+
+.itemsList {
+	width: 1200px;
+	height: 58vh;
+	overflow: auto;
+}
+
+.wrapperList {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+
+	.btnList {
+		width: 240px;
+		height: 40px;
+		font-size: 1.12rem;
+		color: #ffffff;
+		background: #3d0075;
+		border-radius: 8px;
+		border: 0;
+		font-family: 'Rambla', sans-serif;
+		cursor: pointer;
+		transition: 0.5s;
+		&:hover {
+			color: #3d0075;
+			background: #ffffff;
+		}
+		&:active {
+			transform: scale(1.03);
+		}
 	}
 }

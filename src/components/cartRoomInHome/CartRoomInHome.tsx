@@ -72,7 +72,7 @@ const CartRoomInHome: React.FC<CartRoomInHomeProperty> = ({
 							</button>
 						</Link>
 					</div>
-					<div>Дата создания комнаты: {dateCreatedRoom}</div>
+					<div className={styles.dateCreated}>Дата создания комнаты: {dateCreatedRoom}</div>
 				</>
 			)}
 		</div>
