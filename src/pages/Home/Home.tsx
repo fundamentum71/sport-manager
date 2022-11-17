@@ -1,36 +1,38 @@
 import React from 'react';
+import ViewListIcon from '@mui/icons-material/ViewList';
+import ViewModuleIcon from '@mui/icons-material/ViewModule';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { Link } from 'react-router-dom';
 import CartRoomInHome from '../../components/cartRoomInHome/CartRoomInHome';
-import styles from './home.module.scss';
-import btns from '../../style/btns.module.scss';
 import logoPrev from '../../assets/images/logo.svg';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { fetchRooms } from '../../redux/room/asyncActions';
 import ListRoomInHome from '../../components/listRoomInHome/ListRoomInHome';
 
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
+import styles from './home.module.scss';
+import btns from '../../style/btns.module.scss';
 
 function Home() {
 	const dispatch = useAppDispatch();
 	const { items, status } = useAppSelector((state) => state.rooms);
+	const [view, setView] = React.useState('module');
 
-	const [checkRoomList, setCheckRoomList] = React.useState(false);
+	const handleChange = (event: React.MouseEvent<HTMLElement>, nextView: string) => {
+		if (nextView !== null) {
+			setView(nextView);
+			window.localStorage.setItem('view', nextView);
+		}
+	};
 
 	//после перезагрузки список остается списком
 	React.useEffect(() => {
-		if (window.localStorage.getItem('checkRoomList')) {
-			setCheckRoomList(JSON.parse(window.localStorage.getItem('checkRoomList') || ''));
+		if (window.localStorage.getItem('view')) {
+			setView(window.localStorage.getItem('view') || '');
 		}
 	}, []);
 
 	const isRoomsLoading = status === 'loading';
-
-	const onChangeListOrCart = () => {
-		setCheckRoomList(!checkRoomList);
-		window.localStorage.setItem('checkRoomList', JSON.stringify(!checkRoomList));
-	};
 
 	React.useEffect(() => {
 		dispatch(fetchRooms());
@@ -40,18 +42,22 @@ function Home() {
 		<div className={styles.rooms}>
 			<h1>Выберите комнату или создайте свою</h1>
 
-			<FormGroup className={styles.checkRoom}>
-				<FormControlLabel
-					onClick={onChangeListOrCart}
-					checked={checkRoomList}
-					control={<Switch />}
-					label={checkRoomList ? 'Список' : 'Карточки'}
-				/>
-			</FormGroup>
+			<ToggleButtonGroup
+				className={styles.checkRoom}
+				exclusive
+				value={view}
+				onChange={handleChange}>
+				<ToggleButton value="list" aria-label="list">
+					<ViewListIcon />
+				</ToggleButton>
+				<ToggleButton value="module" aria-label="module">
+					<ViewModuleIcon />
+				</ToggleButton>
+			</ToggleButtonGroup>
 
 			<div className={styles.wrapper}>
 				{/* вывод карточке */}
-				{!checkRoomList && (
+				{view == 'module' && (
 					<>
 						<div className={styles.container}>
 							<div className={styles.logoPrev}>
@@ -89,7 +95,7 @@ function Home() {
 					</>
 				)}
 				{/* Вывод по списку */}
-				{checkRoomList && (
+				{view == 'list' && (
 					<div className={styles.wrapperList}>
 						<div className={styles.itemsList}>
 							{/*<ListRoomInHome />*/}
