@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import MainLayout from '../../layouts/MainLayout';
 import AddRoom from '../../pages/AddRoom/AddRoom';
 import EditProfile from '../../pages/EditProfile/EditProfile';
-//import EditRoom from '../../pages/EditRoom/EditRoom';
+import EditRoom from '../../pages/EditRoom/EditRoom';
 import Home from '../../pages/Home/Home';
 import Profile from '../../pages/Profile/Profile';
 import Room from '../../pages/Room/Room';
@@ -70,14 +70,14 @@ function App() {
 					}
 				/>
 
-				{/*<Route
-					path="/editroom"
+				<Route
+					path="/editroom/:id"
 					element={
 						<Suspense fallback={<CircularProgress color="secondary" />}>
 							<EditRoom />
 						</Suspense>
 					}
-				/>*/}
+				/>
 
 				<Route
 					path="/rooms/:id"

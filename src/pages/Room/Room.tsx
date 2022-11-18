@@ -13,7 +13,7 @@ import { userSchema } from '../../redux/auth/types';
 
 //дату создания комнаты
 
-type RoomProperty = {
+export type RoomProperty = {
 	_id: string;
 	title: string;
 	preferredSport: string;
@@ -42,7 +42,7 @@ const Room = () => {
 			})
 			.catch((err) => {
 				console.warn(err);
-				alert('Ошибка при получение комнат');
+				alert('Ошибка при получение комнаты');
 			})
 			.finally(() => {
 				setIsLoading(false);
@@ -62,6 +62,7 @@ const Room = () => {
 				<div className={styles.options}>
 					{data ? (
 						<RoomOptions
+							_id={data._id}
 							title={data.title}
 							preferredSport={data.preferredSport}
 							time={data.time}

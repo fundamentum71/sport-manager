@@ -66,7 +66,8 @@ const CartRoomInHome: React.FC<CartRoomInHomeProperty> = ({
 						<Link to={`/rooms/${_id}`}>
 							<button className={styles.btn}>Войти в комнату</button>
 						</Link>
-						<Link to="/addroom">
+
+						<Link to={`/editroom/${_id}`}>
 							<button className={styles.btn_edit}>
 								<EditIcon />
 							</button>

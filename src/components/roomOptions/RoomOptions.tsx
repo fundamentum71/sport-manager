@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { userSchema } from '../../redux/auth/types';
 
 type RoomOptionsProperty = {
+	_id: string | undefined;
 	title: string | undefined;
 	preferredSport: string | undefined;
 	time: string | undefined;
@@ -13,6 +14,7 @@ type RoomOptionsProperty = {
 	user: userSchema | undefined;
 };
 const RoomOptions: React.FC<RoomOptionsProperty> = ({
+	_id,
 	title,
 	preferredSport,
 	time,
@@ -23,7 +25,7 @@ const RoomOptions: React.FC<RoomOptionsProperty> = ({
 	return (
 		<>
 			<h2>{title}</h2>
-			<Link to="/addroom">
+			<Link to={`/editroom/${_id}`}>
 				<button className={styles.btn_edit}>
 					<EditIcon />
 				</button>
