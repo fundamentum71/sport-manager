@@ -13,7 +13,6 @@ import ListHeaderRoomInHome from '../../components/listHeaderRoomInHome/ListHead
 
 import styles from './home.module.scss';
 import btns from '../../style/btns.module.scss';
-import Spiner from '../../components/spiner/Spiner';
 
 function Home() {
 	const dispatch = useAppDispatch();
@@ -35,6 +34,7 @@ function Home() {
 	}, []);
 
 	const isRoomsLoading = status === 'loading';
+	const isRoomsLoaded = status === 'loaded';
 
 	React.useEffect(() => {
 		dispatch(fetchRooms());
@@ -73,11 +73,11 @@ function Home() {
 						</div>
 
 						<div className={styles.itemsCart}>
-							{items.length === 0 && <h2>Список комнат пуст...</h2>}
+							{!isRoomsLoading && items.length === 0 && <h2>Список комнат пуст...</h2>}
 
-							{isRoomsLoading && <Spiner />}
+							{/*{isRoomsLoading && <Spiner />}*/}
 
-							{(isRoomsLoading ? [...Array(5)] : items).map((obj, index) =>
+							{(isRoomsLoading ? [...Array(2)] : items).map((obj, index) =>
 								isRoomsLoading ? (
 									<CartRoomInHome key={index} isLoading={true} />
 								) : (
@@ -106,7 +106,7 @@ function Home() {
 						<div className={styles.itemsList}>
 							{/*<ListRoomInHome />*/}
 
-							{items.length === 0 && <h2>Список комнат пуст...</h2>}
+							{!isRoomsLoading && items.length === 0 && <h2>Список комнат пуст...</h2>}
 
 							{(isRoomsLoading ? [...Array(5)] : items).map((obj, index) =>
 								isRoomsLoading ? (

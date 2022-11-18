@@ -3,6 +3,7 @@ import styles from './cartRoomInHome.module.scss';
 import EditIcon from '@mui/icons-material/Edit';
 import { Link } from 'react-router-dom';
 import { userSchema } from '../../redux/auth/types';
+import SkeletonCart from './SkeletonCart';
 
 export type CartRoomInHomeProperty = {
 	_id?: string;
@@ -37,7 +38,9 @@ const CartRoomInHome: React.FC<CartRoomInHomeProperty> = ({
 	return (
 		<div className={styles.wrapper}>
 			{isLoading ? (
-				'загрузка'
+				<div className={styles.items}>
+					<SkeletonCart />
+				</div>
 			) : (
 				<>
 					<div className={styles.items}>
