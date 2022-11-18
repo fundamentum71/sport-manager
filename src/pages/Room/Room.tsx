@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom';
 import axios from '../../axios';
 import CartRoomInHome from '../../components/cartRoomInHome/CartRoomInHome';
 import { userSchema } from '../../redux/auth/types';
+import Spiner from '../../components/Spiner';
 
 //дату создания комнаты
 
@@ -50,7 +51,7 @@ const Room = () => {
 	}, []);
 
 	if (isLoading) {
-		return <CartRoomInHome isLoading={isLoading} isFullPost />;
+		return <Spiner />;
 	}
 
 	return (
