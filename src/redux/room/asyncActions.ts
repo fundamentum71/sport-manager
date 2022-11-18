@@ -8,6 +8,7 @@ export const fetchRooms = createAsyncThunk('rooms/fetchRooms', async () => {
 });
 
 //асинхронный запрос на удаление комнат
-export const fetchRemoveRooms = createAsyncThunk('rooms/fetchRemoveRooms', async (id) =>
-	axios.delete(`/rooms/${id}`),
+export const fetchRemoveRooms = createAsyncThunk(
+	'rooms/fetchRemoveRooms',
+	async (id: string | undefined) => axios.delete(`/rooms/${id}`),
 );

@@ -30,9 +30,15 @@ const roomsSlice = createSlice({
 		});
 
 		//удаление комнаты
-		//builder.addCase(fetchRemoveRooms.pending, (state, action) => {
-		//	state.items = state.items.filter((obj) => obj._id !== action.meta.arg);
-		//});
+		builder.addCase(fetchRemoveRooms.pending, (state, action) => {
+			state.items = state.items.filter((obj) => obj._id !== action.meta.arg);
+			state.status = 'loading';
+		});
+
+		builder.addCase(fetchRemoveRooms.fulfilled, (state, action) => {
+			//state.items = action.payload;
+			state.status = 'loaded';
+		});
 	},
 });
 

@@ -13,6 +13,7 @@ import ListHeaderRoomInHome from '../../components/listHeaderRoomInHome/ListHead
 
 import styles from './home.module.scss';
 import btns from '../../style/btns.module.scss';
+import Spiner from '../../components/spiner/Spiner';
 
 function Home() {
 	const dispatch = useAppDispatch();
@@ -74,6 +75,8 @@ function Home() {
 						<div className={styles.itemsCart}>
 							{items.length === 0 && <h2>Список комнат пуст...</h2>}
 
+							{isRoomsLoading && <Spiner />}
+
 							{(isRoomsLoading ? [...Array(5)] : items).map((obj, index) =>
 								isRoomsLoading ? (
 									<CartRoomInHome key={index} isLoading={true} />
@@ -98,7 +101,8 @@ function Home() {
 				{/* Вывод по списку */}
 				{view == 'list' && (
 					<div className={styles.wrapperList}>
-						<ListHeaderRoomInHome />
+						{items.length !== 0 && <ListHeaderRoomInHome />}
+
 						<div className={styles.itemsList}>
 							{/*<ListRoomInHome />*/}
 

@@ -4,6 +4,8 @@ import axios from '../../axios';
 import { Navigate, useParams } from 'react-router-dom';
 import logoPrev from '../../assets/images/logo.svg';
 import { RoomProperty } from '../Room/Room';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { fetchRemoveRooms } from '../../redux/room/asyncActions';
 
 type addRoomProps = {
 	title: string;
@@ -14,9 +16,14 @@ type addRoomProps = {
 };
 
 const EditRoom = () => {
+	const { status } = useAppSelector((state) => state.rooms);
+	const isRoomsLoading = status === 'loading';
+
+	const dispatch = useAppDispatch();
 	//данные получвенной комнаты
 	const [data, setData] = React.useState<RoomProperty>();
 	const [isLoading, setIsLoading] = React.useState(true);
+	const [isDelete, setIsDelete] = React.useState(false);
 
 	//значения инпутов
 	const [title, setTitle] = React.useState('');
@@ -43,7 +50,7 @@ const EditRoom = () => {
 	const [errorTime, setErrorTime] = React.useState('');
 	const [errorPlace, setErrorPlace] = React.useState('');
 
-	const [toRoomPage, setToRoomPage] = React.useState('');
+	const [toRoomPage, setToRoomPage] = React.useState(false);
 
 	const [formValid, setFormValid] = React.useState(false);
 
@@ -148,7 +155,7 @@ const EditRoom = () => {
 			await axios
 				.patch(`/rooms/${data?._id}`, editRoomData)
 				.then((res) => {
-					setToRoomPage(res.data._id);
+					setToRoomPage(true);
 				})
 				.then(() => {
 					//очитска формы
@@ -194,16 +201,27 @@ const EditRoom = () => {
 		}
 	};
 
+	const onClickRemoveRoom = (_id: string | undefined) => {
+		if (window.confirm('Вы действительно хотите удалить комнату?')) {
+			dispatch(fetchRemoveRooms(_id));
+			setIsDelete(true);
+		}
+	};
+
 	return (
 		<>
-			{toRoomPage != '' && <Navigate to={`/rooms/${data?._id}`} />}
+			{isLoading ? <h2>Загрузка</h2> : isDelete && <Navigate to={`/`} />}
+
+			{toRoomPage && <Navigate to={`/rooms/${data?._id}`} />}
 			<section className={styles.wrapper}>
 				<div>
 					<h2>Редактирование комнаты</h2>
 					<div className={styles.logoPrev}>
 						<img src={logoPrev} alt="logo" />
 					</div>
-					<button className={styles.btn_red}>Удалить комнату</button>
+					<button onClick={() => onClickRemoveRoom(data?._id)} className={styles.btn_red}>
+						Удалить комнату
+					</button>
 				</div>
 				<div className={styles.options}>
 					<label htmlFor=""> Название комнаты</label>
