@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './listRoomInHome.module.scss';
 import EditIcon from '@mui/icons-material/Edit';
 import { CartRoomInHomeProperty } from '../cartRoomInHome/CartRoomInHome';
+import SkeletonList from './SkeletonList';
 
 const ListRoomInHome: React.FC<CartRoomInHomeProperty> = ({
 	_id,
@@ -20,7 +21,7 @@ const ListRoomInHome: React.FC<CartRoomInHomeProperty> = ({
 	return (
 		<div className={styles.wrapper}>
 			{isLoading ? (
-				'Загрузка'
+				<SkeletonList />
 			) : (
 				<>
 					<div className={styles.items}>

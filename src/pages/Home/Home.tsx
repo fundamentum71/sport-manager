@@ -75,8 +75,6 @@ function Home() {
 						<div className={styles.itemsCart}>
 							{!isRoomsLoading && items.length === 0 && <h2>Список комнат пуст...</h2>}
 
-							{/*{isRoomsLoading && <Spiner />}*/}
-
 							{(isRoomsLoading ? [...Array(2)] : items).map((obj, index) =>
 								isRoomsLoading ? (
 									<CartRoomInHome key={index} isLoading={true} />
@@ -104,11 +102,9 @@ function Home() {
 						{items.length !== 0 && <ListHeaderRoomInHome />}
 
 						<div className={styles.itemsList}>
-							{/*<ListRoomInHome />*/}
-
 							{!isRoomsLoading && items.length === 0 && <h2>Список комнат пуст...</h2>}
 
-							{(isRoomsLoading ? [...Array(5)] : items).map((obj, index) =>
+							{(isRoomsLoading ? [...Array(3)] : items).map((obj, index) =>
 								isRoomsLoading ? (
 									<ListRoomInHome key={index} isLoading={true} />
 								) : (
