@@ -145,6 +145,9 @@ function SignUp() {
 			if (!data.payload) {
 				return alert('Не удалось зарегистрироваться!');
 			}
+			if ('token' in data.payload) {
+				window.localStorage.setItem('token', data.payload.token);
+			}
 
 			setName('');
 			setNameDirty(false);
