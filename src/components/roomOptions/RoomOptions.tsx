@@ -12,6 +12,7 @@ type RoomOptionsProperty = {
 	date: string | undefined;
 	place: string | undefined;
 	user: userSchema | undefined;
+	isEditable: boolean;
 };
 const RoomOptions: React.FC<RoomOptionsProperty> = ({
 	_id,
@@ -21,15 +22,18 @@ const RoomOptions: React.FC<RoomOptionsProperty> = ({
 	date,
 	place,
 	user,
+	isEditable,
 }) => {
 	return (
 		<>
 			<h2>{title}</h2>
-			<Link to={`/editroom/${_id}`}>
-				<button className={styles.btn_edit}>
-					<EditIcon />
-				</button>
-			</Link>
+			{isEditable && (
+				<Link to={`/editroom/${_id}`}>
+					<button className={styles.btn_edit}>
+						<EditIcon />
+					</button>
+				</Link>
+			)}
 
 			<div className={styles.option}>Вид спорта: {preferredSport}</div>
 			<div className={styles.option}>Дата: {date}</div>

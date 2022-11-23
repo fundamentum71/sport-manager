@@ -11,6 +11,7 @@ import axios from '../../axios';
 import CartRoomInHome from '../../components/cartRoomInHome/CartRoomInHome';
 import { userSchema } from '../../redux/auth/types';
 import Spiner from '../../components/Spiner';
+import { useAppSelector } from '../../redux/hooks';
 
 //дату создания комнаты
 
@@ -31,6 +32,7 @@ export type RoomProperty = {
 const Room = () => {
 	const [data, setData] = React.useState<RoomProperty>();
 	const [isLoading, setIsLoading] = React.useState(true);
+	const userData = useAppSelector((store) => store.auth.data);
 
 	//получаем id
 	const { id } = useParams();
@@ -70,6 +72,7 @@ const Room = () => {
 							date={data.date}
 							place={data.place}
 							user={data.user}
+							isEditable={userData?._id == data.user._id}
 						/>
 					) : (
 						'Нет данных'

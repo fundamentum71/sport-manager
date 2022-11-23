@@ -1,11 +1,13 @@
 import React from 'react';
 import styles from './editRoom.module.scss';
 import axios from '../../axios';
-import { Navigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import logoPrev from '../../assets/images/logo.svg';
 import { RoomProperty } from '../Room/Room';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { fetchRemoveRooms } from '../../redux/room/asyncActions';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ClearIcon from '@mui/icons-material/Clear';
 
 type addRoomProps = {
 	title: string;
@@ -18,6 +20,7 @@ type addRoomProps = {
 const EditRoom = () => {
 	const { status } = useAppSelector((state) => state.rooms);
 	const isRoomsLoading = status === 'loading';
+	const userData = useAppSelector((store) => store.auth.data);
 
 	const dispatch = useAppDispatch();
 	//данные получвенной комнаты
@@ -208,96 +211,149 @@ const EditRoom = () => {
 		}
 	};
 
+	const isEditable = userData?._id == data?.user._id;
+	console.log('auth', isEditable);
+
 	return (
 		<>
 			{isLoading ? <h2>Загрузка</h2> : isDelete && <Navigate to={`/`} />}
 
 			{toRoomPage && <Navigate to={`/rooms/${data?._id}`} />}
-			<section className={styles.wrapper}>
-				<div>
+
+			{isEditable ? (
+				<section className={styles.wrapper}>
+					<Link to="/">
+						<div className={styles.cancel}>
+							<ClearIcon />
+						</div>
+					</Link>
 					<h2>Редактирование комнаты</h2>
-					<div className={styles.logoPrev}>
-						<img src={logoPrev} alt="logo" />
-					</div>
-					<button onClick={() => onClickRemoveRoom(data?._id)} className={styles.btn_red}>
+					<div className={styles.colomn}>
+						<div className={styles.menu}>
+							<div className={styles.logoPrev}>
+								<img src={logoPrev} alt="logo" />
+							</div>
+							<div>
+								<div>*Введите новые данные и примените изменения</div>
+								<div className={styles.text_remove}>
+									Вы так же можете <b onClick={() => onClickRemoveRoom(data?._id)}>удалить</b>{' '}
+									комнату{' '}
+									<button
+										onClick={() => onClickRemoveRoom(data?._id)}
+										className={styles.btn_remove}>
+										<DeleteIcon />
+									</button>
+								</div>
+							</div>
+
+							{/*<button onClick={() => onClickRemoveRoom(data?._id)} className={styles.btn_red}>
 						Удалить комнату
-					</button>
-				</div>
-				<div className={styles.options}>
-					<label htmlFor=""> Название комнаты</label>
-					{errorTitle && (
-						<div
-							style={{ color: 'red', fontSize: '0.8rem', textAlign: 'center', marginTop: '-14px' }}>
-							{errorTitle}
+					</button>*/}
 						</div>
-					)}
-					<input
-						name="title"
-						type="text"
-						placeholder="Введите название комнаты"
-						value={title}
-						onChange={(e) => onChangeValue(e)}
-					/>
+						<div className={styles.options}>
+							<label htmlFor=""> Название комнаты</label>
+							{errorTitle && (
+								<div
+									style={{
+										color: 'red',
+										fontSize: '0.8rem',
+										textAlign: 'center',
+										marginTop: '-14px',
+									}}>
+									{errorTitle}
+								</div>
+							)}
+							<input
+								name="title"
+								type="text"
+								placeholder="Введите название комнаты"
+								value={title}
+								onChange={(e) => onChangeValue(e)}
+							/>
 
-					<label htmlFor="">Вид спорта</label>
-					{errorPreferredSport && (
-						<div
-							style={{ color: 'red', fontSize: '0.8rem', textAlign: 'center', marginTop: '-14px' }}>
-							{errorPreferredSport}
+							<label htmlFor="">Вид спорта</label>
+							{errorPreferredSport && (
+								<div
+									style={{
+										color: 'red',
+										fontSize: '0.8rem',
+										textAlign: 'center',
+										marginTop: '-14px',
+									}}>
+									{errorPreferredSport}
+								</div>
+							)}
+							<input
+								name="preferredSport"
+								type="text"
+								placeholder="Вид спорта"
+								value={preferredSport}
+								onChange={(e) => onChangeValue(e)}
+							/>
+
+							<label htmlFor="">Дата</label>
+							{errorDate && (
+								<div
+									style={{
+										color: 'red',
+										fontSize: '0.8rem',
+										textAlign: 'center',
+										marginTop: '-14px',
+									}}>
+									{errorDate}
+								</div>
+							)}
+							<input
+								name="date"
+								type="date"
+								placeholder=""
+								value={date}
+								onChange={(e) => onChangeValue(e)}
+							/>
+
+							<label htmlFor="">Время</label>
+							{errorTime && (
+								<div
+									style={{
+										color: 'red',
+										fontSize: '0.8rem',
+										textAlign: 'center',
+										marginTop: '-14px',
+									}}>
+									{errorTime}
+								</div>
+							)}
+							<input name="time" type="time" value={time} onChange={(e) => onChangeValue(e)} />
+
+							<label htmlFor="">Площадка</label>
+							{errorPlace && (
+								<div
+									style={{
+										color: 'red',
+										fontSize: '0.8rem',
+										textAlign: 'center',
+										marginTop: '-14px',
+									}}>
+									{errorPlace}
+								</div>
+							)}
+							<input
+								name="place"
+								type="text"
+								placeholder="Введите адрес"
+								value={place}
+								onChange={(e) => onChangeValue(e)}
+							/>
+
+							<button disabled={!formValid} className={styles.btn} onClick={onSubmit}>
+								Применить изменения
+							</button>
 						</div>
-					)}
-					<input
-						name="preferredSport"
-						type="text"
-						placeholder="Вид спорта"
-						value={preferredSport}
-						onChange={(e) => onChangeValue(e)}
-					/>
-
-					<label htmlFor="">Дата</label>
-					{errorDate && (
-						<div
-							style={{ color: 'red', fontSize: '0.8rem', textAlign: 'center', marginTop: '-14px' }}>
-							{errorDate}
-						</div>
-					)}
-					<input
-						name="date"
-						type="date"
-						placeholder=""
-						value={date}
-						onChange={(e) => onChangeValue(e)}
-					/>
-
-					<label htmlFor="">Время</label>
-					{errorTime && (
-						<div
-							style={{ color: 'red', fontSize: '0.8rem', textAlign: 'center', marginTop: '-14px' }}>
-							{errorTime}
-						</div>
-					)}
-					<input name="time" type="time" value={time} onChange={(e) => onChangeValue(e)} />
-
-					<label htmlFor="">Площадка</label>
-					{errorPlace && (
-						<div
-							style={{ color: 'red', fontSize: '0.8rem', textAlign: 'center', marginTop: '-14px' }}>
-							{errorPlace}
-						</div>
-					)}
-					<input
-						name="place"
-						type="text"
-						placeholder="Введите адрес"
-						value={place}
-						onChange={(e) => onChangeValue(e)}
-					/>
-
-					<button disabled={!formValid} className={styles.btn} onClick={onSubmit}>
-						Применить изменения
-					</button>
-				</div>
-			</section>
+					</div>
+				</section>
+			) : (
+				<h2>В доступе отказано</h2>
+			)}
 		</>
 	);
 };

@@ -19,6 +19,8 @@ function Home() {
 	const { items, status } = useAppSelector((state) => state.rooms);
 	const [view, setView] = React.useState('module');
 
+	const userData = useAppSelector((store) => store.auth.data);
+
 	const handleChange = (event: React.MouseEvent<HTMLElement>, nextView: string) => {
 		if (nextView !== null) {
 			setView(nextView);
@@ -90,6 +92,7 @@ function Home() {
 										user={obj.user}
 										joined={obj.joined.length}
 										dateCreatedRoom={obj.dateCreatedRoom}
+										isEditable={userData?._id == obj.user._id}
 									/>
 								),
 							)}
@@ -119,6 +122,7 @@ function Home() {
 										user={obj.user}
 										joined={obj.joined.length}
 										dateCreatedRoom={obj.dateCreatedRoom}
+										isEditable={userData?._id == obj.user._id}
 									/>
 								),
 							)}

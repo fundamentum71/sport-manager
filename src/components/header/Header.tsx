@@ -38,9 +38,9 @@ const Header = () => {
 		}
 	};
 
-	React.useEffect(() => {
-		console.log('isAuth', isAuth, 'dataUser', dataUser, LoadedDataUser);
-	});
+	//React.useEffect(() => {
+	//	console.log('isAuth', isAuth, 'dataUser', dataUser, LoadedDataUser);
+	//});
 
 	return (
 		<div className={styles.wrapper}>

@@ -18,8 +18,8 @@ export type CartRoomInHomeProperty = {
 	joined?: string[];
 	visitors?: string[];
 	viewsCount?: number;
-	isFullPost?: boolean;
 	dateCreatedRoom?: string;
+	isEditable?: boolean;
 };
 
 const CartRoomInHome: React.FC<CartRoomInHomeProperty> = ({
@@ -32,8 +32,8 @@ const CartRoomInHome: React.FC<CartRoomInHomeProperty> = ({
 	isLoading,
 	user,
 	joined,
-	isFullPost,
 	dateCreatedRoom,
+	isEditable,
 }) => {
 	return (
 		<div className={styles.wrapper}>
@@ -44,7 +44,9 @@ const CartRoomInHome: React.FC<CartRoomInHomeProperty> = ({
 			) : (
 				<>
 					<div className={styles.items}>
-						<h2>{isFullPost ? title : <Link to={`/rooms/${_id}`}>{title}</Link>}</h2>
+						<h2>
+							<Link to={`/rooms/${_id}`}>{title}</Link>
+						</h2>
 						<div className={styles.item}>
 							<b>Создал комнату:</b> {user ? user.fullName : ''}
 						</div>
@@ -70,11 +72,13 @@ const CartRoomInHome: React.FC<CartRoomInHomeProperty> = ({
 							<button className={styles.btn}>Войти в комнату</button>
 						</Link>
 
-						<Link to={`/editroom/${_id}`}>
-							<button className={styles.btn_edit}>
-								<EditIcon />
-							</button>
-						</Link>
+						{isEditable && (
+							<Link to={`/editroom/${_id}`}>
+								<button className={styles.btn_edit}>
+									<EditIcon />
+								</button>
+							</Link>
+						)}
 					</div>
 					<div className={styles.dateCreated}>Дата создания комнаты: {dateCreatedRoom}</div>
 				</>
