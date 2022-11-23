@@ -24,7 +24,7 @@ export type RoomProperty = {
 	place: string;
 	user: userSchema;
 	isLoading: boolean;
-	joined: string[];
+	joined: userSchema[];
 	visitors: string[];
 	viewsCount: number;
 };
@@ -73,6 +73,10 @@ const Room = () => {
 							place={data.place}
 							user={data.user}
 							isEditable={userData?._id == data.user._id}
+							userInRoom={userData}
+							allJoined={data.joined}
+							//вернет true если пользователь присоединился к игре
+							isGamer={Boolean(data.joined.filter((item) => userData?._id !== item._id))}
 						/>
 					) : (
 						'Нет данных'

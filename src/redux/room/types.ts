@@ -9,7 +9,7 @@ export type roomSchema = {
 	place: string;
 	user: userSchema;
 	isLoading?: boolean;
-	joined?: string[];
+	joined: userSchema[];
 	visitors?: string[];
 	viewsCount?: number;
 };
