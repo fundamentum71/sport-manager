@@ -59,9 +59,9 @@ const Room = () => {
 	return (
 		<section className={styles.wrapper}>
 			<div className={styles.container}>
-				<div className={styles.visitors}>
+				{/*<div className={styles.visitors}>
 					<RoomVisitors visitors={data?.visitors} />
-				</div>
+				</div>*/}
 				<div className={styles.options}>
 					{data ? (
 						<RoomOptions
@@ -76,7 +76,7 @@ const Room = () => {
 							userInRoom={userData}
 							allJoined={data.joined}
 							//вернет true если пользователь присоединился к игре
-							isGamer={Boolean(data.joined.filter((item) => userData?._id !== item._id))}
+							isGamer={data?.joined.some(({ _id }) => _id === userData?._id)}
 						/>
 					) : (
 						'Нет данных'

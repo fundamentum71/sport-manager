@@ -40,20 +40,16 @@ const RoomOptions: React.FC<RoomOptionsProperty> = ({
 	allJoined,
 	isGamer,
 }) => {
-	//console.log(userInRoom);
-	//console.log(allJoined);
+	const [allUsersJoined, setAllUsersJoined] = React.useState<userSchema[]>();
 
-	console.log('isGamer', isGamer);
-	//console.log('userInRoom', userInRoom?._id);
-	//console.log(
-	//	'allJoined',
-	//	allJoined.map((item) => item._id),
-	//);
+	//React.useEffect(() => {
+	//	setAllUsersJoined(allJoined);
+	//	console.log(allUsersJoined);
+	//}, [allJoined]);
 
 	const addUserToGame = async () => {
 		if (userInRoom) {
 			allJoined.push(userInRoom);
-			//console.log(joinedInRoom);
 		}
 		const editRoomData: upRoomProps = {
 			title,
@@ -70,6 +66,31 @@ const RoomOptions: React.FC<RoomOptionsProperty> = ({
 			.catch((err) => {
 				console.warn(err);
 				alert('Ошибка при присоединении к комнате');
+			})
+			.finally(() => {
+				//setIsLoading(false);
+			});
+	};
+
+	const removeUserToGame = async () => {
+		if (userInRoom) {
+			//allJoined.push(userInRoom);
+		}
+		const editRoomData: upRoomProps = {
+			title,
+			preferredSport,
+			date,
+			time,
+			place,
+			joined: allJoined.filter((obj) => obj._id !== userInRoom?._id),
+		};
+
+		await axios
+			.patch(`/rooms/${_id}`, editRoomData)
+
+			.catch((err) => {
+				console.warn(err);
+				alert('Ошибка при выходе из комнаты');
 			})
 			.finally(() => {
 				//setIsLoading(false);
@@ -94,10 +115,15 @@ const RoomOptions: React.FC<RoomOptionsProperty> = ({
 			<div className={styles.option}>Площадка: {place}</div>
 
 			<div className={styles.btns}>
-				<button onClick={addUserToGame} className={styles.btn}>
-					Учавствую
-				</button>
-				<button className={styles.btn_exit}>Отказаться</button>
+				{!isGamer ? (
+					<button onClick={addUserToGame} className={styles.btn}>
+						Учавствую
+					</button>
+				) : (
+					<button onClick={removeUserToGame} className={styles.btn_exit}>
+						Отказаться
+					</button>
+				)}
 			</div>
 		</>
 	);
