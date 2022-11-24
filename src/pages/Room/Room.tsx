@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './room.module.scss';
-
 import RoomVisitors from '../../components/roomVisitor/RoomVisitors';
 import RoomOptions from '../../components/roomOptions/RoomOptions';
 import RoomGamers from '../../components/roomGamers/RoomGamers';
@@ -8,12 +7,20 @@ import RoomInputChat from '../../components/roomInputChat/RoomInputChat';
 import RoomChat from '../../components/roomChat/RoomChat';
 import { useParams } from 'react-router-dom';
 import axios from '../../axios';
-import CartRoomInHome from '../../components/cartRoomInHome/CartRoomInHome';
 import { userSchema } from '../../redux/auth/types';
 import Spiner from '../../components/Spiner';
 import { useAppSelector } from '../../redux/hooks';
 
 //дату создания комнаты
+
+type upRoomProps = {
+	title: string | undefined;
+	preferredSport: string | undefined;
+	date: string | undefined;
+	time: string | undefined;
+	place: string | undefined;
+	joined: userSchema[] | undefined;
+};
 
 export type RoomProperty = {
 	_id: string;
@@ -31,8 +38,11 @@ export type RoomProperty = {
 
 const Room = () => {
 	const [data, setData] = React.useState<RoomProperty>();
+	//загрузка для компонента room
 	const [isLoading, setIsLoading] = React.useState(true);
 	const userData = useAppSelector((store) => store.auth.data);
+	//загрузка для отдельных комнонетов
+	const [isLoadingOption, setIsLoadingOption] = React.useState(false);
 
 	//получаем id
 	const { id } = useParams();
@@ -50,8 +60,59 @@ const Room = () => {
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, []);
+	}, [data]);
 
+	//функция добавляет юзера в массив геймеров
+	const addUserToGame = async () => {
+		setIsLoadingOption(true);
+
+		if (userData) {
+			data?.joined.push(userData);
+		}
+		const editRoomData: upRoomProps = {
+			title: data?.title,
+			preferredSport: data?.preferredSport,
+			date: data?.date,
+			time: data?.time,
+			place: data?.place,
+			joined: data?.joined,
+		};
+
+		await axios
+			.patch(`/rooms/${data?._id}`, editRoomData)
+
+			.catch((err) => {
+				console.warn(err);
+				alert('Ошибка при присоединении к комнате');
+			})
+			.finally(() => {
+				setIsLoadingOption(false);
+			});
+	};
+
+	//функция удаляет юзера из массива геймеров
+	const removeUserToGame = async () => {
+		setIsLoadingOption(true);
+		const editRoomData: upRoomProps = {
+			title: data?.title,
+			preferredSport: data?.preferredSport,
+			date: data?.date,
+			time: data?.time,
+			place: data?.place,
+			joined: data?.joined.filter((obj) => obj._id !== userData?._id),
+		};
+
+		await axios
+			.patch(`/rooms/${data?._id}`, editRoomData)
+
+			.catch((err) => {
+				console.warn(err);
+				alert('Ошибка при выходе из комнаты');
+			})
+			.finally(() => {
+				setIsLoadingOption(false);
+			});
+	};
 	if (isLoading) {
 		return <Spiner />;
 	}
@@ -59,9 +120,9 @@ const Room = () => {
 	return (
 		<section className={styles.wrapper}>
 			<div className={styles.container}>
-				{/*<div className={styles.visitors}>
+				<div className={styles.visitors}>
 					<RoomVisitors visitors={data?.visitors} />
-				</div>*/}
+				</div>
 				<div className={styles.options}>
 					{data ? (
 						<RoomOptions
@@ -73,17 +134,18 @@ const Room = () => {
 							place={data.place}
 							user={data.user}
 							isEditable={userData?._id == data.user._id}
-							userInRoom={userData}
-							allJoined={data.joined}
 							//вернет true если пользователь присоединился к игре
 							isGamer={data?.joined.some(({ _id }) => _id === userData?._id)}
+							addUserToGame={() => addUserToGame()}
+							removeUserToGame={() => removeUserToGame()}
+							isLoadingOption={isLoadingOption}
 						/>
 					) : (
 						'Нет данных'
 					)}
 				</div>
 				<div className={styles.gamers}>
-					<RoomGamers joined={data?.joined} />
+					<RoomGamers joined={data?.joined} isLoadingOption={isLoadingOption} />
 				</div>
 			</div>
 			<h2>ЧАТ</h2>
