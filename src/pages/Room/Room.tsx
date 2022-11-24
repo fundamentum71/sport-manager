@@ -59,6 +59,7 @@ const Room = () => {
 			})
 			.finally(() => {
 				setIsLoading(false);
+				setIsLoadingOption(false);
 			});
 	}, [data]);
 
@@ -86,7 +87,7 @@ const Room = () => {
 				alert('Ошибка при присоединении к комнате');
 			})
 			.finally(() => {
-				setIsLoadingOption(false);
+				//setIsLoadingOption(false);
 			});
 	};
 
@@ -110,7 +111,7 @@ const Room = () => {
 				alert('Ошибка при выходе из комнаты');
 			})
 			.finally(() => {
-				setIsLoadingOption(false);
+				//setIsLoadingOption(false);
 			});
 	};
 	if (isLoading) {

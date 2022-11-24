@@ -3,6 +3,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import styles from './roomOptions.module.scss';
 import { Link } from 'react-router-dom';
 import { userSchema } from '../../redux/auth/types';
+import Spiner from '../../components/Spiner';
 
 type RoomOptionsProperty = {
 	_id: string | undefined;
@@ -51,7 +52,9 @@ const RoomOptions: React.FC<RoomOptionsProperty> = ({
 			<div className={styles.option}>Создал комнату: {user?.fullName}</div>
 			<div className={styles.option}>Площадка: {place}</div>
 
-			{!isLoadingOption && (
+			{isLoadingOption ? (
+				<Spiner />
+			) : (
 				<div className={styles.btns}>
 					{!isGamer ? (
 						<button onClick={() => addUserToGame()} className={styles.btn}>
