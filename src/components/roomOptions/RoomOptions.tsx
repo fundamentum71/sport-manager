@@ -52,21 +52,17 @@ const RoomOptions: React.FC<RoomOptionsProperty> = ({
 			<div className={styles.option}>Создал комнату: {user?.fullName}</div>
 			<div className={styles.option}>Площадка: {place}</div>
 
-			{isLoadingOption ? (
-				<Spiner />
-			) : (
-				<div className={styles.btns}>
-					{!isGamer ? (
-						<button onClick={() => addUserToGame()} className={styles.btn}>
-							Учавствую
-						</button>
-					) : (
-						<button onClick={() => removeUserToGame()} className={styles.btn_exit}>
-							Отказаться
-						</button>
-					)}
-				</div>
-			)}
+			<div className={styles.btns}>
+				{!isGamer ? (
+					<button onClick={() => addUserToGame()} className={styles.btn}>
+						Учавствую
+					</button>
+				) : (
+					<button onClick={() => removeUserToGame()} className={styles.btn_exit}>
+						Отказаться
+					</button>
+				)}
+			</div>
 		</>
 	);
 };

@@ -43,6 +43,7 @@ const Room = () => {
 	const userData = useAppSelector((store) => store.auth.data);
 	//загрузка для отдельных комнонетов
 	const [isLoadingOption, setIsLoadingOption] = React.useState(false);
+	//const [isButtonDisable, setIsButtonDisable] = React.useState(false);
 
 	//получаем id
 	const { id } = useParams();
@@ -65,7 +66,7 @@ const Room = () => {
 
 	//функция добавляет юзера в массив геймеров
 	const addUserToGame = async () => {
-		setIsLoadingOption(true);
+		//setIsLoadingOption(true);
 
 		if (userData) {
 			data?.joined.push(userData);
@@ -93,7 +94,7 @@ const Room = () => {
 
 	//функция удаляет юзера из массива геймеров
 	const removeUserToGame = async () => {
-		setIsLoadingOption(true);
+		//setIsLoadingOption(true);
 		const editRoomData: upRoomProps = {
 			title: data?.title,
 			preferredSport: data?.preferredSport,
@@ -146,7 +147,10 @@ const Room = () => {
 					)}
 				</div>
 				<div className={styles.gamers}>
-					<RoomGamers joined={data?.joined} isLoadingOption={isLoadingOption} />
+					<RoomGamers
+						joined={data?.joined}
+						//isLoadingOption={isLoadingOption}
+					/>
 				</div>
 			</div>
 			<h2>ЧАТ</h2>
