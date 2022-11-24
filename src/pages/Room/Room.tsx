@@ -13,13 +13,14 @@ import { useAppSelector } from '../../redux/hooks';
 
 //дату создания комнаты
 
-type upRoomProps = {
+export type upRoomProps = {
 	title: string | undefined;
 	preferredSport: string | undefined;
 	date: string | undefined;
 	time: string | undefined;
 	place: string | undefined;
-	joined: userSchema[] | undefined;
+	joined?: userSchema[] | undefined;
+	visitors?: userSchema[] | undefined;
 };
 
 export type RoomProperty = {
@@ -32,7 +33,7 @@ export type RoomProperty = {
 	user: userSchema;
 	isLoading: boolean;
 	joined: userSchema[];
-	visitors: string[];
+	visitors: userSchema[];
 	viewsCount: number;
 };
 
@@ -48,6 +49,7 @@ const Room = () => {
 	//получаем id
 	const { id } = useParams();
 
+	//получение данных о комнате
 	React.useEffect(() => {
 		axios
 			.get(`/rooms/${id}`)
@@ -62,7 +64,7 @@ const Room = () => {
 				setIsLoading(false);
 				setIsLoadingOption(false);
 			});
-	}, [data]);
+	}, []);
 
 	//функция добавляет юзера в массив геймеров
 	const addUserToGame = async () => {
@@ -79,7 +81,7 @@ const Room = () => {
 			place: data?.place,
 			joined: data?.joined,
 		};
-
+		//вход в комнату
 		await axios
 			.patch(`/rooms/${data?._id}`, editRoomData)
 
@@ -89,6 +91,20 @@ const Room = () => {
 			})
 			.finally(() => {
 				//setIsLoadingOption(false);
+			});
+		//обновление данных в комнате
+		axios
+			.get(`/rooms/${id}`)
+			.then((res) => {
+				setData(res.data);
+			})
+			.catch((err) => {
+				console.warn(err);
+				alert('Ошибка при получение комнаты');
+			})
+			.finally(() => {
+				setIsLoading(false);
+				setIsLoadingOption(false);
 			});
 	};
 
@@ -103,7 +119,7 @@ const Room = () => {
 			place: data?.place,
 			joined: data?.joined.filter((obj) => obj._id !== userData?._id),
 		};
-
+		//выход из комнаты
 		await axios
 			.patch(`/rooms/${data?._id}`, editRoomData)
 
@@ -113,6 +129,20 @@ const Room = () => {
 			})
 			.finally(() => {
 				//setIsLoadingOption(false);
+			});
+		//обновление данных в комнате
+		axios
+			.get(`/rooms/${id}`)
+			.then((res) => {
+				setData(res.data);
+			})
+			.catch((err) => {
+				console.warn(err);
+				alert('Ошибка при получение комнаты');
+			})
+			.finally(() => {
+				setIsLoading(false);
+				setIsLoadingOption(false);
 			});
 	};
 	if (isLoading) {

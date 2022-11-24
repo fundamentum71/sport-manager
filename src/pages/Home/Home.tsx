@@ -90,7 +90,8 @@ function Home() {
 										date={obj.date}
 										place={obj.place}
 										user={obj.user}
-										joined={obj.joined.length}
+										joined={obj.joined}
+										visitors={obj.visitors}
 										dateCreatedRoom={obj.dateCreatedRoom}
 										isEditable={userData?._id == obj.user._id}
 									/>
@@ -120,7 +121,7 @@ function Home() {
 										date={obj.date}
 										place={obj.place}
 										user={obj.user}
-										joined={obj.joined.length}
+										joined={obj.joined}
 										dateCreatedRoom={obj.dateCreatedRoom}
 										isEditable={userData?._id == obj.user._id}
 									/>

@@ -30,8 +30,7 @@ const ListRoomInHome: React.FC<CartRoomInHomeProperty> = ({
 						</div>
 						<div className={styles.item}>{user ? user.fullName : ''}</div>
 						<div className={styles.item}>{preferredSport}</div>
-						<div className={styles.item}>{joined}</div>
-
+						<div className={styles.item}>{joined?.length}</div>
 						<div className={styles.item}>{place}</div>
 						<div className={styles.item}>{date}</div>
 						<div className={styles.item}>{time}</div>
