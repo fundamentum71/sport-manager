@@ -152,9 +152,9 @@ const Room = () => {
 	return (
 		<section className={styles.wrapper}>
 			<div className={styles.container}>
-				<div className={styles.visitors}>
+				{/*<div className={styles.visitors}>
 					<RoomVisitors visitors={data?.visitors} />
-				</div>
+				</div>*/}
 				<div className={styles.options}>
 					{data ? (
 						<RoomOptions
