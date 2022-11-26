@@ -5,11 +5,12 @@ import RoomOptions from '../../components/roomOptions/RoomOptions';
 import RoomGamers from '../../components/roomGamers/RoomGamers';
 import RoomInputChat from '../../components/roomInputChat/RoomInputChat';
 import RoomChat from '../../components/roomChat/RoomChat';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from '../../axios';
 import { userSchema } from '../../redux/auth/types';
 import Spiner from '../../components/Spiner';
 import { useAppSelector } from '../../redux/hooks';
+import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 
 //дату создания комнаты
 
@@ -152,6 +153,13 @@ const Room = () => {
 	return (
 		<section className={styles.wrapper}>
 			<div className={styles.container}>
+				<Link to={'/'} style={{ width: '140px', marginRight: '30px' }}>
+					<button className={styles.btn_back}>
+						<ArrowBackIosNewOutlinedIcon className={styles.btn_back_arrow} />
+						<p>Покинуть комнату</p>
+					</button>
+				</Link>
+
 				{/*<div className={styles.visitors}>
 					<RoomVisitors visitors={data?.visitors} />
 				</div>*/}

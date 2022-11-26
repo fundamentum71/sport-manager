@@ -1,4 +1,5 @@
 .wrapper {
+	width: 370px;
 	box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02);
 	text-align: center;
 	border-radius: 10px;
@@ -6,13 +7,18 @@
 	border: 1px solid black;
 	margin: 5px;
 	padding: 3px 5px 0px 5px;
+	//transition: 2s;
 
 	&:hover {
 		cursor: pointer;
 		.slide_info {
-			display: flex;
-			flex-direction: column;
-			align-items: flex-start;
+			padding: 10px;
+			opacity: 1;
+
+			p {
+				position: relative;
+				visibility: visible;
+			}
 		}
 	}
 
@@ -38,7 +44,17 @@
 		}
 	}
 	.slide_info {
-		padding: 10px;
-		display: none;
+		transition: 1s;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+
+		opacity: 0;
+		z-index: -1;
+
+		p {
+			position: absolute;
+			visibility: hidden;
+		}
 	}
 }
