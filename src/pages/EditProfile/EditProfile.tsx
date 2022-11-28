@@ -6,6 +6,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { Link, Navigate } from 'react-router-dom';
 import { useAppSelector } from '../../redux/hooks';
 import { selectIsAuth } from '../../redux/auth/slice';
+import axios from '../../axios';
 
 const EditProfile = () => {
 	const [name, setName] = React.useState('');
@@ -19,6 +20,25 @@ const EditProfile = () => {
 	const [formValid, setFormValid] = React.useState(false);
 
 	const isAuth = useAppSelector(selectIsAuth);
+
+	//добавление картинки
+	const handleChangeFile = async (event: any) => {
+		try {
+			//специальный формат куда можно вшивать картинку и отправлять на бэк
+			const formData = new FormData();
+			const file = event.target.files[0];
+			formData.append('image', file);
+			//загрузка ее на сервер
+			const { data } = await axios.post('/upload', formData);
+			setAvatarImg(data.url);
+			console.log(data.url);
+		} catch (error) {
+			console.warn(error);
+			alert('Произошла оишбка при загрузке картинки');
+		}
+	};
+
+	const onClickRemoveImage = () => {};
 
 	if (!isAuth) {
 		return <Navigate to="/start" />;
@@ -34,7 +54,7 @@ const EditProfile = () => {
 					placeholder="Аватар"
 					className={styles.hidden}
 					//value={avatarImg}
-					//onChange={(e) => onChangeValue(e)}
+					onChange={handleChangeFile}
 				/>
 			</div>
 
@@ -45,7 +65,7 @@ const EditProfile = () => {
 				<div className={styles.logo}>
 					<img src={logo} />
 				</div>
-				<img className={styles.photoAvatar_img} src={avatar} />
+				<img className={styles.photoAvatar_img} src={`http://localhost:4444${avatarImg}`} />
 
 				<span className={styles.photoAvatar_desc}>Нажмите чтобы обновить аватар</span>
 				<button className={styles.btn_clear}>Удалить аватар</button>

@@ -41,7 +41,6 @@ const CartRoomInHome: React.FC<CartRoomInHomeProperty> = ({
 }) => {
 	const userData = useAppSelector((store) => store.auth.data);
 	const allRooms = useAppSelector((state) => state.rooms.items);
-	console.log(allRooms);
 
 	const addUserToVisitors = async () => {
 		//проверка, есть ли пользователь в комнате
