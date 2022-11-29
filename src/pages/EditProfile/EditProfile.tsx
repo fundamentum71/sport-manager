@@ -62,8 +62,9 @@ const EditProfile = () => {
 
 	const RemoveImageOnServer = async (deletePhoto: string) => {
 		if (deletePhoto) {
-			const deleteAvatar: deleteAvatarProp = { deletePhoto };
-			await axios.post('/deleteAvatar', deleteAvatar);
+			console.log('deletePhoto', deletePhoto);
+			const deleteAvatarReq: deleteAvatarProp = { deletePhoto };
+			await axios.post('/deleteAvatar', deleteAvatarReq);
 		}
 	};
 
@@ -77,7 +78,7 @@ const EditProfile = () => {
 			//загрузка ее на сервер
 			const { data } = await axios.post(`/upload`, formData);
 			setAvatarImg(data.url);
-			console.log(avatarImg);
+			//console.log(avatarImg);
 		} catch (error) {
 			console.warn(error);
 			alert('Произошла оишбка при загрузке картинки');
@@ -154,6 +155,7 @@ const EditProfile = () => {
 			//удаляет старую фотографию с сервера
 			if (avatarImg !== oldAvatarImg) {
 				if (oldAvatarImg) {
+					console.log('oldAvatarImg', oldAvatarImg);
 					RemoveImageOnServer(oldAvatarImg);
 				}
 			}
