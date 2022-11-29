@@ -26,7 +26,7 @@ const SignUp = React.lazy(
 
 function App() {
 	const dispatch = useAppDispatch();
-	//const isAuth = useAppSelector(selectIsAuth);
+
 	//проверка на авторизацию
 	React.useEffect(() => {
 		dispatch(fetchAuthMe());

@@ -27,7 +27,11 @@ export const RoomGamerItem: React.FC<RoomGamerItem> = ({
 		<div className={styles.wrapper}>
 			<div className={styles.line}>
 				<div className={styles.avatar}>
-					<img src={avatar} alt="avatar" />
+					{avatarUrl ? (
+						<img className={styles.photoAvatar_img} src={`http://localhost:4444${avatarUrl}`} />
+					) : (
+						<img className={styles.photoAvatar_img} src={avatar} />
+					)}
 				</div>
 				<div>{fullName}</div>
 				<InfoOutlinedIcon className={styles.info_icon} />

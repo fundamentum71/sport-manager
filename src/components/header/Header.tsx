@@ -53,7 +53,14 @@ const Header = () => {
 			{dataUser?.fullName && (
 				<Link to="/profile">
 					<div className={styles.userBlock}>
-						<img className={styles.userBlock__photo} src={dataUser.avatarUrl || avatar} />
+						{dataUser.avatarUrl ? (
+							<img
+								className={styles.userBlock__photo}
+								src={`http://localhost:4444${dataUser.avatarUrl}`}
+							/>
+						) : (
+							<img className={styles.userBlock__photo} src={avatar} />
+						)}
 
 						<div className={styles.userBlock__name}>{dataUser.fullName}</div>
 					</div>

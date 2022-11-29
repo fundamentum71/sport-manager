@@ -11,6 +11,7 @@ export type userSchema = {
 	age?: string;
 	gamesPlayed?: number;
 	gamesLeave?: number;
+	city?: string;
 };
 
 //export type userReturne = null | userSchema;

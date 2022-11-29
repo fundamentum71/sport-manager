@@ -25,7 +25,15 @@ function Profile() {
 			</div>
 			<div className={styles.row_info}>
 				<div className={styles.info_avatar}>
-					<img src={avatar} alt="avatar" />
+					{/*<img src={avatar} alt="avatar" />*/}
+					{dataUser?.avatarUrl ? (
+						<img
+							className={styles.photoAvatar_img}
+							src={`http://localhost:4444${dataUser?.avatarUrl}`}
+						/>
+					) : (
+						<img className={styles.photoAvatar_img} src={avatar} />
+					)}
 				</div>
 
 				<div className={styles.info_container}>
