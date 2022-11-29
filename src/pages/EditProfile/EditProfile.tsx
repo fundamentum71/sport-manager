@@ -17,6 +17,10 @@ type editProfileProps = {
 	city?: string;
 };
 
+type deleteAvatarProp = {
+	avatarImg: string;
+};
+
 const EditProfile = () => {
 	const dataUser = useAppSelector((store) => store.auth.data);
 	const dispatch = useAppDispatch();
@@ -47,13 +51,21 @@ const EditProfile = () => {
 		}
 	}, [dataUser]);
 
+	const onClickRemoveImage = async () => {
+		setAvatarImg(null);
+		if (avatarImg) {
+			const deleteAvatar: deleteAvatarProp = { avatarImg };
+			await axios.post('/deleteAvatar', deleteAvatar);
+		}
+	};
+
 	//добавление картинки
 	const handleChangeFile = async (event: any) => {
 		try {
 			//специальный формат куда можно вшивать картинку и отправлять на бэк
 			const formData = new FormData();
 			const file = event.target.files[0];
-			formData.append('image', file);
+			formData.append('avatar', file);
 			//загрузка ее на сервер
 			const { data } = await axios.post(`/upload`, formData);
 			setAvatarImg(data.url);
@@ -63,8 +75,6 @@ const EditProfile = () => {
 			alert('Произошла оишбка при загрузке картинки');
 		}
 	};
-
-	const onClickRemoveImage = () => {};
 
 	const onChangeValue = (e: any) => {
 		switch (e.target.name) {
@@ -169,11 +179,7 @@ const EditProfile = () => {
 					)}
 
 					<span className={styles.photoAvatar_desc}>Нажмите чтобы обновить аватар</span>
-					<button
-						className={styles.btn_clear}
-						onClick={() => {
-							setAvatarImg(null);
-						}}>
+					<button className={styles.btn_clear} onClick={onClickRemoveImage}>
 						Удалить аватар
 					</button>
 				</label>
