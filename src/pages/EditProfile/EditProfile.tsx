@@ -18,7 +18,7 @@ type editProfileProps = {
 };
 
 type deleteAvatarProp = {
-	avatarImg: string;
+	deletePhoto: string;
 };
 
 const EditProfile = () => {
@@ -28,7 +28,11 @@ const EditProfile = () => {
 	const [name, setName] = React.useState('');
 	const [age, setAge] = React.useState('');
 	const [preferredSport, setPreferredSport] = React.useState('');
+
+	//стейты для старой и новой фотографии
+	const [oldAvatarImg, setOldAvatarImg] = React.useState<string | null>('');
 	const [avatarImg, setAvatarImg] = React.useState<string | null>('');
+
 	const [city, setCity] = React.useState('');
 
 	const [nameError, setNameError] = React.useState('');
@@ -46,6 +50,7 @@ const EditProfile = () => {
 			setName(dataUser.fullName);
 			setAge(dataUser.age ? dataUser.age : '');
 			setPreferredSport(dataUser.preferredSport ? dataUser.preferredSport : '');
+			setOldAvatarImg(dataUser.avatarUrl ? dataUser.avatarUrl : '');
 			setAvatarImg(dataUser.avatarUrl ? dataUser.avatarUrl : '');
 			setCity(dataUser.city ? dataUser.city : '');
 		}
@@ -53,8 +58,11 @@ const EditProfile = () => {
 
 	const onClickRemoveImage = async () => {
 		setAvatarImg(null);
-		if (avatarImg) {
-			const deleteAvatar: deleteAvatarProp = { avatarImg };
+	};
+
+	const RemoveImageOnServer = async (deletePhoto: string) => {
+		if (deletePhoto) {
+			const deleteAvatar: deleteAvatarProp = { deletePhoto };
 			await axios.post('/deleteAvatar', deleteAvatar);
 		}
 	};
@@ -141,6 +149,13 @@ const EditProfile = () => {
 			//если пользователь нажмет сабмит с незаполненным полем
 			if (name == '') {
 				setNameError('Поле является обязательным');
+			}
+
+			//удаляет старую фотографию с сервера
+			if (avatarImg !== oldAvatarImg) {
+				if (oldAvatarImg) {
+					RemoveImageOnServer(oldAvatarImg);
+				}
 			}
 		}
 	};
