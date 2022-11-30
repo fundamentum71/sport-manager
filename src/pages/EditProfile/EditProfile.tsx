@@ -78,7 +78,6 @@ const EditProfile = () => {
 			//загрузка ее на сервер
 			const { data } = await axios.post(`/upload`, formData);
 			setAvatarImg(data.url);
-			//console.log(avatarImg);
 		} catch (error) {
 			console.warn(error);
 			alert('Произошла оишбка при загрузке картинки');
