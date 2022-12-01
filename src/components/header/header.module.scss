@@ -17,7 +17,7 @@
 }
 
 .userBlock {
-	width: 300px;
+	width: 240px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -32,7 +32,7 @@
 		object-fit: cover;
 	}
 	&:hover {
-		background-color: rgb(221, 208, 255);
+		background-color: rgb(218, 218, 218);
 	}
 }
 
@@ -45,7 +45,7 @@
 .btn {
 	color: #3d0075;
 	font-weight: 800;
-	width: 100px;
+	width: 120px;
 	height: 30px;
 	border-radius: 5px;
 	border: 1px solid #3d0075;
