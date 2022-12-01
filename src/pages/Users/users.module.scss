@@ -1,0 +1,52 @@
+.wrapper {
+	width: 100%;
+	padding: 30px;
+}
+
+p {
+	font-size: 1.2rem;
+	span {
+		font-size: 1.3rem;
+		color: #3d0075;
+	}
+}
+
+.tabl {
+	display: flex;
+	justify-content: center;
+	margin: 10px auto;
+}
+
+.tabl_item {
+	text-align: center;
+	margin: 10px;
+	width: 150px;
+	display: flex;
+	justify-content: center;
+	text-transform: uppercase;
+	font-weight: 800;
+}
+
+.tabl_item_small {
+	text-align: center;
+	margin: 10px;
+	width: 50px;
+	display: flex;
+	justify-content: center;
+	text-transform: uppercase;
+	font-weight: 800;
+}
+.tabl_item_long {
+	text-align: center;
+	margin: 10px;
+	width: 250px;
+	display: flex;
+	justify-content: center;
+	text-transform: uppercase;
+	font-weight: 800;
+}
+
+.users {
+	height: 450px;
+	overflow: auto;
+}

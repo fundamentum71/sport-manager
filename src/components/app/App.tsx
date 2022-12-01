@@ -13,7 +13,7 @@ import { fetchAuthMe } from '../../redux/auth/asyncActions';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { selectIsAuth } from '../../redux/auth/slice';
 import About from '../../pages/About/About';
-import Statistics from '../../pages/Statistics/Statistics';
+import Statistics from '../../pages/Users/Users';
 import Version from '../../pages/Version/Version';
 //import styles from './app.module.scss';
 
@@ -135,7 +135,7 @@ function App() {
 					}
 				/>
 				<Route
-					path="/statistics"
+					path="/users"
 					element={
 						<Suspense fallback={<CircularProgress color="secondary" />}>
 							<Statistics />

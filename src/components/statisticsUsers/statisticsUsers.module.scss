@@ -1,0 +1,46 @@
+.users {
+	display: flex;
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	border-radius: 12px;
+	justify-content: center;
+	margin: 10px auto;
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.users_item {
+	margin: 10px;
+	width: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.users_item_small {
+	margin: 10px;
+	width: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.users_item_long {
+	margin: 10px;
+	width: 250px;
+	display: flex;
+	//justify-content: center;
+	align-items: center;
+}
+.users_item_avatar {
+	margin-right: 10px;
+	img {
+		object-fit: cover;
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 25px;
+		height: 25px;
+	}
+}
