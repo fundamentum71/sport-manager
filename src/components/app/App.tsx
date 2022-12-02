@@ -15,6 +15,7 @@ import { selectIsAuth } from '../../redux/auth/slice';
 import About from '../../pages/About/About';
 import Statistics from '../../pages/Users/Users';
 import Version from '../../pages/Version/Version';
+import FullUser from '../../pages/FullUser/FullUser';
 //import styles from './app.module.scss';
 
 const NotFound = React.lazy(
@@ -87,6 +88,15 @@ function App() {
 					element={
 						<Suspense fallback={<CircularProgress color="secondary" />}>
 							<Room />
+						</Suspense>
+					}
+				/>
+
+				<Route
+					path="/users/:id"
+					element={
+						<Suspense fallback={<CircularProgress color="secondary" />}>
+							<FullUser />
 						</Suspense>
 					}
 				/>

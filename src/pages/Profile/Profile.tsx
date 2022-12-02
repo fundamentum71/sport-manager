@@ -10,6 +10,8 @@ function Profile() {
 	const LoadedDataUser = useAppSelector((store) => store.auth.status);
 	const isAuth = useAppSelector(selectIsAuth);
 
+	console.log(dataUser);
+
 	if (!isAuth) {
 		return <Navigate to="/start" />;
 	}
@@ -38,7 +40,7 @@ function Profile() {
 
 				<div className={styles.info_container}>
 					<div className={styles.info_name}>{dataUser?.fullName || 'Нет данных'}</div>
-					<div className={styles.info_reg}>В сети</div>
+					<div className={styles.info_reg}>Город: {dataUser?.city || 'Нет данных'}</div>
 					<div className={styles.info_reg}>
 						Дата регистрации: {dataUser?.createdAt.substring(0, 10)}
 					</div>
@@ -47,10 +49,10 @@ function Profile() {
 						Предпочитаемый вид спорта: {dataUser?.preferredSport || 'Нет данных'}
 					</div>
 					<div className={styles.info_statistic}>
-						Сыграно игр: {dataUser?.gamesPlayed || 'Нет данных'}
+						Сыграно игр: {dataUser?.gamesPlayed ?? 'Нет данных'}
 					</div>
 					<div className={styles.info_statistic}>
-						Не пришел: {dataUser?.gamesLeave || 'Нет данных'}
+						Не пришел: {dataUser?.gamesLeave ?? 'Нет данных'}
 					</div>
 
 					<div className={styles.info_btns}>

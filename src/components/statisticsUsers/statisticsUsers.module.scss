@@ -4,9 +4,6 @@
 	border-radius: 12px;
 	justify-content: center;
 	margin: 10px auto;
-	&:hover {
-		cursor: pointer;
-	}
 }
 
 .users_item {
@@ -31,6 +28,9 @@
 	display: flex;
 	//justify-content: center;
 	align-items: center;
+	&:hover {
+		cursor: pointer;
+	}
 }
 .users_item_avatar {
 	margin-right: 10px;

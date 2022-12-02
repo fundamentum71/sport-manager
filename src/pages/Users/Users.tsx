@@ -52,6 +52,8 @@ const Users = () => {
 							preferredSport={obj.preferredSport}
 							createdAt={obj.createdAt}
 							order={index + 1}
+							gamesLeave={obj.gamesLeave}
+							gamesPlayed={obj.gamesPlayed}
 						/>
 					),
 				)}
