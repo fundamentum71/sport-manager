@@ -5,6 +5,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../redux/hooks';
 import { selectIsAuth } from '../../redux/auth/slice';
 import axios from '../../axios';
+import CloseIcon from '@mui/icons-material/Close';
 
 type fullUserProps = {
 	avatarUrl: string;
@@ -20,6 +21,7 @@ type fullUserProps = {
 function FullUser() {
 	const [data, setData] = React.useState<fullUserProps | undefined>();
 	const isAuth = useAppSelector(selectIsAuth);
+	const [fullPhoto, setFullPhoto] = React.useState(false);
 
 	//получаем id
 	const { id } = useParams();
@@ -43,44 +45,64 @@ function FullUser() {
 	}
 
 	return (
-		<div className={styles.wrapper}>
-			<div className={styles.row_menu}>
-				<div className={styles.menu_item}>Об аккаунте</div>
-				{/*<div className={styles.menu_item}>Об аккаунте</div>
+		<>
+			<div className={styles.wrapper}>
+				{fullPhoto && (
+					<div className={styles.fullPhoto}>
+						{data?.avatarUrl ? (
+							<img
+								className={styles.photoAvatar_img}
+								src={`http://localhost:4444${data?.avatarUrl}`}
+							/>
+						) : (
+							<img className={styles.photoAvatar_img} src={avatar} />
+						)}
+						<div className={styles.cancel} onClick={() => setFullPhoto(false)}>
+							<CloseIcon />
+						</div>
+					</div>
+				)}
+
+				<div className={styles.row_menu}>
+					<div className={styles.menu_item}>Об аккаунте</div>
+					{/*<div className={styles.menu_item}>Об аккаунте</div>
 				<div className={styles.menu_item}>Об аккаунте</div>
 				<div className={styles.menu_item}>Об аккаунте</div>
 				<div className={styles.menu_item}>Об аккаунте</div>*/}
-			</div>
-			<div className={styles.row_info}>
-				<div className={styles.info_avatar}>
-					{/*<img src={avatar} alt="avatar" />*/}
-					{data?.avatarUrl ? (
-						<img
-							className={styles.photoAvatar_img}
-							src={`http://localhost:4444${data?.avatarUrl}`}
-						/>
-					) : (
-						<img className={styles.photoAvatar_img} src={avatar} />
-					)}
 				</div>
+				<div className={styles.row_info}>
+					<div className={styles.info_avatar} onClick={() => setFullPhoto(true)}>
+						{data?.avatarUrl ? (
+							<img
+								className={styles.photoAvatar_img}
+								src={`http://localhost:4444${data?.avatarUrl}`}
+							/>
+						) : (
+							<img className={styles.photoAvatar_img} src={avatar} />
+						)}
+					</div>
 
-				<div className={styles.info_container}>
-					<div className={styles.info_name}>{data?.fullName || 'Нет данных'}</div>
-					<div className={styles.info_reg}>Город: {data?.city || 'Нет данных'}</div>
-					<div className={styles.info_reg}>
-						Дата регистрации: {data?.createdAt.substring(0, 10)}
+					<div className={styles.info_container}>
+						<div className={styles.info_name}>{data?.fullName || 'Нет данных'}</div>
+						<div className={styles.info_reg}>Город: {data?.city || 'Нет данных'}</div>
+						<div className={styles.info_reg}>
+							Дата регистрации: {data?.createdAt.substring(0, 10)}
+						</div>
+						<div className={styles.info_reg}>Возраст: {data?.age || 'Нет данных'}</div>
+						<div className={styles.info_statistic}>
+							Предпочитаемый вид спорта: {data?.preferredSport || 'Нет данных'}
+						</div>
+						<div className={styles.info_statistic}>
+							Сыграно игр: {data?.gamesPlayed ?? 'Нет данных'}
+						</div>
+						<div className={styles.info_statistic}>
+							Не пришел: {data?.gamesLeave ?? 'Нет данных'}
+						</div>
 					</div>
-					<div className={styles.info_reg}>Возраст: {data?.age || 'Нет данных'}</div>
-					<div className={styles.info_statistic}>
-						Предпочитаемый вид спорта: {data?.preferredSport || 'Нет данных'}
-					</div>
-					<div className={styles.info_statistic}>
-						Сыграно игр: {data?.gamesPlayed ?? 'Нет данных'}
-					</div>
-					<div className={styles.info_statistic}>Не пришел: {data?.gamesLeave ?? 'Нет данных'}</div>
 				</div>
 			</div>
-		</div>
+			{fullPhoto && <div className={styles.overlay} onClick={() => setFullPhoto(false)}></div>}
+		</>
 	);
 }
 

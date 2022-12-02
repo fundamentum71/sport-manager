@@ -18,8 +18,6 @@ const Users = () => {
 		dispatch(fetchUsers());
 	}, []);
 
-	console.log(items);
-	console.log(status);
 	return (
 		<div className={styles.wrapper}>
 			<h2>Пользователи</h2>

@@ -30,7 +30,6 @@ export const StatisticsUsers: React.FC<StatisticsUsersProps> = ({
 	gamesLeave,
 	order,
 }) => {
-	console.log(avatarUrl);
 	return (
 		<div>
 			<div className={styles.users}>

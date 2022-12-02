@@ -212,7 +212,6 @@ const EditRoom = () => {
 	};
 
 	const isEditable = userData?._id == data?.user._id;
-	console.log('auth', isEditable);
 
 	return (
 		<>

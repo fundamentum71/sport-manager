@@ -42,8 +42,6 @@ const EditProfile = () => {
 
 	const isAuth = useAppSelector(selectIsAuth);
 
-	//console.log(dataUser);
-
 	//если данные есть, записываем в value
 	React.useEffect(() => {
 		if (dataUser) {
@@ -62,7 +60,6 @@ const EditProfile = () => {
 
 	const RemoveImageOnServer = async (deletePhoto: string) => {
 		if (deletePhoto) {
-			console.log('deletePhoto', deletePhoto);
 			const deleteAvatarReq: deleteAvatarProp = { deletePhoto };
 			await axios.post('/deleteAvatar', deleteAvatarReq);
 		}
@@ -154,7 +151,6 @@ const EditProfile = () => {
 			//удаляет старую фотографию с сервера
 			if (avatarImg !== oldAvatarImg) {
 				if (oldAvatarImg) {
-					console.log('oldAvatarImg', oldAvatarImg);
 					RemoveImageOnServer(oldAvatarImg);
 				}
 			}
